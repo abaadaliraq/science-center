@@ -6,7 +6,7 @@ export const proposalImages = {
   mars: "mars-dome.jpg", jupiter: "jupiter-dome.jpg", moon: "moon-dome.jpg", walkway: "space-walkway.jpg",
 } as const;
 export type ProposalImageKey = keyof typeof proposalImages;
-export type ProposalAssets = Partial<Record<ProposalImageKey, boolean>>;
+export type ProposalAssets = Partial<Record<ProposalImageKey, string>>;
 export const proposalTourUrl = "https://my.matterport.com/show?play=1&lang=en-US&m=RzqiFTybqAB";
 
 export const proposalContent = {

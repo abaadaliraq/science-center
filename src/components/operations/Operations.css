@@ -36,7 +36,7 @@
   --operations-muted: #4d5846;
   --operations-accent: #50633d;
   --operations-line: #b2bca7;
-  --operations-paper: #f8f9f4;
+  --operations-paper: var(--editorial-paper);
   color: var(--operations-ink);
   background: var(--operations-paper);
 }
@@ -76,7 +76,7 @@
   line-height: 1.36;
   text-wrap: balance;
 }
-[lang="en"] .operations-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 600; line-height: 1.14; }
+[lang="en"] .operations-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 500; line-height: 1.14; }
 .operations-back {
   display: inline-flex;
   align-items: center;
@@ -94,14 +94,14 @@
 .operations-page h2 {
   margin: 0;
   font-size: clamp(1.35rem, 2.45vw, 2.2rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.45;
 }
 .operations-governance {
   padding: clamp(1.25rem, 4vw, 3rem);
   margin-bottom: clamp(1.25rem, 3vw, 2.5rem);
   border: 1px solid var(--operations-line);
-  background: #edf0e5;
+  background: var(--editorial-tint);
 }
 .operations-org { max-width: 48rem; margin: 1.6rem auto 0; text-align: center; }
 .operations-org ul, .operations-cards, .operations-revenue-sources, .operations-steps, .operations-kpi-grid {
@@ -147,7 +147,7 @@
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   border: 1px solid var(--operations-line);
-  background: #fff;
+  background: var(--editorial-panel);
 }
 .operations-block:nth-child(even) { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
 .operations-block:nth-child(even) .operations-block-visual { grid-area: 1 / 1; }
@@ -223,7 +223,7 @@
 }
 .operations-steps li + li { border-top: 1px solid #d8dfd1; }
 
-.operations-kpi { padding-block: clamp(2.5rem, 5vw, 4rem); background: #e9eedf; }
+.operations-kpi { padding-block: clamp(2.5rem, 5vw, 4rem); background: var(--editorial-panel); }
 .operations-kpi p { margin: .5rem 0 1.2rem; color: var(--operations-muted); font-size: .9rem; line-height: 1.65; }
 .operations-kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .operations-kpi-grid li { padding: 1rem; border-top: 2px solid var(--operations-accent); font-weight: 600; }

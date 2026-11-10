@@ -37,7 +37,7 @@
   --feasibility-muted: #654e3e;
   --feasibility-accent: #854d31;
   --feasibility-border: #d8c6b6;
-  --feasibility-paper: #faf7f2;
+  --feasibility-paper: var(--editorial-paper);
   color: var(--feasibility-ink);
   background: var(--feasibility-paper);
 }
@@ -76,7 +76,7 @@
   line-height: 1.36;
   text-wrap: balance;
 }
-[lang="en"] .feasibility-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 600; line-height: 1.14; }
+[lang="en"] .feasibility-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 500; line-height: 1.14; }
 .feasibility-back {
   display: inline-flex;
   align-items: center;
@@ -91,18 +91,18 @@
 
 .feasibility-body { padding-block: clamp(2rem, 5vw, 5rem); }
 .feasibility-block { margin-top: clamp(2rem, 5vw, 4rem); min-width: 0; }
-.feasibility-block h2 { margin: 0 0 .8rem; font-size: clamp(1.35rem, 2.45vw, 2.2rem); line-height: 1.45; font-weight: 600; }
+.feasibility-block h2 { margin: 0 0 .8rem; font-size: clamp(1.35rem, 2.45vw, 2.2rem); line-height: 1.45; font-weight: 500; }
 .feasibility-note { margin: .8rem 0 0; color: var(--feasibility-muted); font-size: .9rem; line-height: 1.85; }
 .feasibility-body > .feasibility-note {
   margin: 0;
   padding: .8rem 1rem;
   border-inline-start: 2px solid var(--feasibility-accent);
-  background: #f0e7dc;
+  background: var(--editorial-tint);
 }
 .feasibility-budget, .feasibility-cash-chart {
   padding: clamp(1rem, 2.7vw, 2rem);
   border: 1px solid var(--feasibility-border);
-  background: #fff;
+  background: var(--editorial-panel);
 }
 .feasibility-budget { margin-bottom: .85rem; }
 .feasibility-budget-bar { display: flex; height: .75rem; overflow: hidden; }
@@ -113,13 +113,13 @@
 .feasibility-budget-legend li > span { flex: 0 0 .65rem; height: .65rem; background: #854d31; }
 .feasibility-budget-legend li + li > span { background: #c3936a; }
 
-.feasibility-table-scroll { max-width: 100%; overflow-x: auto; border: 1px solid var(--feasibility-border); background: #fff; }
+.feasibility-table-scroll { max-width: 100%; overflow-x: auto; border: 1px solid var(--feasibility-border); background: var(--editorial-panel); }
 .feasibility-table-scroll:focus-visible { outline-offset: 2px; }
 .feasibility-table-scroll table { width: 100%; min-width: 33rem; border-collapse: collapse; font-size: .86rem; line-height: 1.55; }
 .feasibility-table-scroll :is(th, td) { padding: .7rem .9rem; border-top: 1px solid #e8ded3; text-align: start; }
-.feasibility-table-scroll thead { background: #f0e7dc; }
+.feasibility-table-scroll thead { background: var(--editorial-tint); }
 .feasibility-table-scroll tbody th { font-weight: 500; }
-.feasibility-table-scroll tbody tr:nth-child(even) { background: #faf7f2; }
+.feasibility-table-scroll tbody tr:nth-child(even) { background: var(--editorial-paper); }
 .feasibility-money, .feasibility-kpis bdi, .feasibility-chart-axis bdi { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .feasibility-table-scroll tr.feasibility-total { background: #efe1d1; font-weight: 700; }
 
@@ -132,7 +132,7 @@
   padding: 1rem;
   border: 1px solid var(--feasibility-border);
   border-top: 3px solid var(--kpi-ink, var(--feasibility-accent));
-  background: #fff;
+  background: var(--editorial-panel);
   font-size: .85rem;
   line-height: 1.55;
 }
@@ -149,18 +149,18 @@
 .feasibility-chart { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .55rem; }
 .feasibility-chart-axis { position: relative; min-width: 6.3rem; height: clamp(8rem, 17vw, 12rem); color: var(--feasibility-muted); font-size: .73rem; }
 .feasibility-chart-axis span { position: absolute; right: 0; transform: translateY(-50%); }
-.feasibility-chart-plot svg { display: block; width: 100%; height: clamp(8rem, 17vw, 12rem); background: #faf7f2; }
+.feasibility-chart-plot svg { display: block; width: 100%; height: clamp(8rem, 17vw, 12rem); background: var(--editorial-paper); }
 .feasibility-chart-zero { stroke: #a98a73; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .feasibility-chart-line { fill: none; stroke: var(--feasibility-accent); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
 .feasibility-chart-years { position: relative; height: 1.35rem; margin-top: .3rem; font-size: .73rem; }
 .feasibility-chart-years span { position: absolute; transform: translateX(-50%); }
 .feasibility-facts { display: flex; flex-wrap: wrap; gap: .65rem; margin: 0 0 .85rem; }
-.feasibility-facts > div { flex: 1 1 14rem; display: grid; gap: .35rem; padding: .8rem 1rem; border: 1px solid var(--feasibility-border); background: #f0e7dc; font-size: .87rem; }
+.feasibility-facts > div { flex: 1 1 14rem; display: grid; gap: .35rem; padding: .8rem 1rem; border: 1px solid var(--feasibility-border); background: var(--editorial-tint); font-size: .87rem; }
 .feasibility-facts strong { color: var(--feasibility-accent); font-size: clamp(1.1rem, 2vw, 1.6rem); }
 .feasibility-payroll-extras { display: grid; gap: .5rem; margin: .8rem 0 0; }
-.feasibility-payroll-extras > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; padding: .75rem .9rem; border: 1px solid var(--feasibility-border); background: #fff; font-size: .85rem; }
+.feasibility-payroll-extras > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; padding: .75rem .9rem; border: 1px solid var(--feasibility-border); background: var(--editorial-panel); font-size: .85rem; }
 .feasibility-payroll-extras dd { margin: 0; font-weight: 600; }
-.feasibility-disclosure { margin-top: 1rem; padding: .75rem 1rem; border: 1px solid var(--feasibility-border); background: #fff; }
+.feasibility-disclosure { margin-top: 1rem; padding: .75rem 1rem; border: 1px solid var(--feasibility-border); background: var(--editorial-panel); }
 .feasibility-disclosure summary { cursor: pointer; font-weight: 600; font-size: .9rem; line-height: 1.8; }
 .feasibility-disclosure .feasibility-table-scroll { margin-top: .8rem; }
 .feasibility-method-link { color: var(--feasibility-accent); }

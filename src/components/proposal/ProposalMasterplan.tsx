@@ -6,13 +6,13 @@ import { proposalContent, proposalImages } from "@/content/proposal";
 import { useLanguage } from "../LanguageProvider";
 import ProposalImage from "./ProposalImage";
 
-export default function ProposalMasterplan({ available }: { available?: boolean }) {
+export default function ProposalMasterplan({ version }: { version?: string }) {
   const { language } = useLanguage();
   const copy = proposalContent[language];
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [failed, setFailed] = useState(false);
-  const src = `/images/proposal/${proposalImages.masterplan}`;
+  const src = `/images/proposal/${proposalImages.masterplan}?v=${version}`;
 
   function handleImageError() {
     setFailed(true);
@@ -21,7 +21,7 @@ export default function ProposalMasterplan({ available }: { available?: boolean 
 
   return (
     <figure className="proposal-masterplan" data-proposal-reveal>
-      {!available || failed ? (
+      {!version || failed ? (
         <div className="proposal-masterplan-preview">
           <ProposalImage asset="masterplan" alt={copy.masterplanAlt} contain />
         </div>

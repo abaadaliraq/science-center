@@ -10,14 +10,14 @@ import useProposalMotion from "../proposal/useProposalMotion";
 import FinancialModel from "./FinancialModel";
 import "./Feasibility.css";
 
-function FeasibilityPhoto({ asset, available }: { asset: keyof FeasibilityAssets; available?: boolean }) {
+function FeasibilityPhoto({ asset, version }: { asset: keyof FeasibilityAssets; version?: string }) {
   const { language } = useLanguage();
   const [failed, setFailed] = useState(false);
   return (
     <div className="feasibility-photo">
-      {available && !failed ? (
+      {version && !failed ? (
         <Image
-          src={`/images/feasibility/${feasibilityImages[asset]}`}
+          src={`/images/feasibility/${feasibilityImages[asset]}?v=${version}`}
           alt=""
           fill
           sizes={asset === "hero" ? "100vw" : "(max-width: 700px) 100vw, 40vw"}
@@ -41,7 +41,7 @@ export function FeasibilitySection({ assets = {} }: { assets?: FeasibilityAssets
       summary={copy.summary}
       href="/financial-feasibility"
       linkLabel={copy.explore}
-      image={<FeasibilityPhoto asset="cover" available={assets.cover} />}
+      image={<FeasibilityPhoto asset="cover" version={assets.cover} />}
     />
   );
 }
@@ -56,7 +56,7 @@ export function FeasibilityDetails({ assets = {} }: { assets?: FeasibilityAssets
   return (
     <section ref={root} className="feasibility-page" aria-labelledby="feasibility-title" data-history-transition>
       <header className="feasibility-hero">
-        <FeasibilityPhoto asset="hero" available={assets.hero} />
+        <FeasibilityPhoto asset="hero" version={assets.hero} />
         <div className="feasibility-inner" data-proposal-reveal>
           <HistoryLink href="/#financial-feasibility" className="feasibility-back">
             <span aria-hidden="true">←</span>{copy.back}

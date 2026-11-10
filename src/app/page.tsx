@@ -12,22 +12,18 @@ import { FeasibilitySection } from "@/components/feasibility/Feasibility";
 import FeasibilityLoader from "@/components/feasibility/FeasibilityLoader";
 import { ImplementationSection } from "@/components/implementation/Implementation";
 import ImplementationLoader from "@/components/implementation/ImplementationLoader";
-import HomeFooter from "@/components/HomeFooter";
 
 export default function Home() {
   return (
-    <>
-      <main id="main-content" className="home-presentation" tabIndex={-1}>
-        <Hero />
-        <ProjectIntroduction />
-        <Suspense fallback={<HistoricalBackground />}><HistoryTeaserLoader /></Suspense>
-        <Suspense fallback={<ProjectProposalSection />}><ProposalSectionLoader /></Suspense>
-        <Suspense fallback={<OperationsSection />}><OperationsLoader view="section" /></Suspense>
-        <Suspense fallback={<FeasibilitySection />}><FeasibilityLoader view="section" /></Suspense>
-        <Suspense fallback={<ImplementationSection />}><ImplementationLoader view="section" /></Suspense>
-        <PresentationMotion />
-      </main>
-      <HomeFooter />
-    </>
+    <main id="main-content" className="home-presentation" tabIndex={-1}>
+      <Hero />
+      <ProjectIntroduction />
+      <Suspense fallback={<HistoricalBackground />}><HistoryTeaserLoader /></Suspense>
+      <Suspense fallback={<ProjectProposalSection />}><ProposalSectionLoader /></Suspense>
+      <Suspense fallback={<OperationsSection />}><OperationsLoader view="section" /></Suspense>
+      <Suspense fallback={<FeasibilitySection />}><FeasibilityLoader view="section" /></Suspense>
+      <Suspense fallback={<ImplementationSection />}><ImplementationLoader view="section" /></Suspense>
+      <PresentationMotion />
+    </main>
   );
 }

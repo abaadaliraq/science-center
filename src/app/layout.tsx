@@ -3,6 +3,7 @@ import { Amiri, Alexandria, Montserrat, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import LanguageProvider from "@/components/LanguageProvider";
 import PresentationSidebar from "@/components/PresentationSidebar";
+import HomeFooter from "@/components/HomeFooter";
 import { presentation } from "@/content/presentation";
 
 const amiri = Amiri({ variable: "--font-amiri", subsets: ["arabic"], weight: ["400", "700"], display: "swap" });
@@ -20,7 +21,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ar" dir="rtl" data-scroll-behavior="smooth" className={`${amiri.variable} ${notoSans.variable} ${montserrat.variable} ${alexandria.variable} antialiased`}>
       <body>
-        <LanguageProvider><PresentationSidebar />{children}</LanguageProvider>
+        <LanguageProvider>
+          <PresentationSidebar />
+          {children}
+          <HomeFooter />
+        </LanguageProvider>
       </body>
     </html>
   );

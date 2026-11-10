@@ -8,7 +8,7 @@ export const operationsImages = {
 } as const;
 
 export type OperationsImage = keyof typeof operationsImages;
-export type OperationsAssets = Partial<Record<OperationsImage, boolean>>;
+export type OperationsAssets = Partial<Record<OperationsImage, string>>;
 
 export const operationsContent = {
   ar: {

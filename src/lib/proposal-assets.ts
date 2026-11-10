@@ -1,18 +1,12 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { proposalImages, type ProposalAssets, type ProposalImageKey } from "@/content/proposal";
+import { readPublicImageVersions } from "@/lib/public-image-versions";
 
-export async function readProposalAssets(): Promise<ProposalAssets> {
-  try {
-    const entries = await readdir(path.join(process.cwd(), "public", "images", "proposal"), { withFileTypes: true });
-    const available = new Set(entries.filter((entry) => entry.isFile()).map((entry) => entry.name));
-    return Object.fromEntries(Object.entries(proposalImages).map(([key, file]) => [key as ProposalImageKey, available.has(file)]));
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return {};
-    throw error;
-  }
+export function readProposalAssets(): Promise<ProposalAssets> {
+  return readPublicImageVersions("proposal", proposalImages);
 }
 
 export async function readProposalDomeVersions(): Promise<Partial<Record<ProposalImageKey, string>>> {

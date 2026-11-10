@@ -43,14 +43,14 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
             <p className="proposal-lead">{copy.vision}</p>
             <ol className="proposal-vision-route">{copy.visionSteps.map((step, index) => <li key={index}><span className="proposal-route-dot" aria-hidden="true" />{step}</li>)}</ol>
           </div>
-          <div className="proposal-vision-image" data-proposal-reveal><ProposalImage asset="vision" available={assets.vision} alt={copy.visionTitle} parallax /></div>
+          <div className="proposal-vision-image" data-proposal-reveal><ProposalImage asset="vision" version={assets.vision} alt={copy.visionTitle} parallax /></div>
         </div>
       </section>
 
       <section className="proposal-block proposal-site" aria-labelledby="proposal-site-title">
         <div className="proposal-inner">
           <header className="proposal-section-heading" data-proposal-reveal><div className="proposal-kicker"><span>02</span><span className="proposal-rule" /></div><h2 id="proposal-site-title">{copy.siteTitle}</h2></header>
-          <ProposalMasterplan available={assets.masterplan} />
+          <ProposalMasterplan version={assets.masterplan} />
           <div className="proposal-expansion-grid proposal-zones">
             {copy.siteZones.map((zone) => <article key={zone.title} className="proposal-expansion-card" data-proposal-reveal><h3>{zone.title}</h3><p>{zone.description}</p></article>)}
           </div>
@@ -65,14 +65,13 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
               <h3 className="proposal-group-title" data-proposal-reveal>{group.title}</h3>
               <div className={group.className}>{group.items.map((item, index) => {
                 const isDome = group.className === "proposal-domes-grid";
-                const version = isDome ? domeVersions[item.image] : undefined;
+                const version = isDome ? domeVersions[item.image] : assets[item.image];
                 return (
                   <article key={item.image} className={`proposal-component${isDome ? "" : ` proposal-component-${index + 1}`}`} data-proposal-reveal>
                     <div className="proposal-component-image">
                       <ProposalImage
                         key={version ?? item.image}
                         asset={item.image}
-                        available={isDome ? Boolean(version) : assets[item.image]}
                         version={version}
                         alt={item.title}
                         parallax={item.image === "planetarium" || item.image === "gravity"}
@@ -86,7 +85,7 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
             </div>
           ))}
           <article className="proposal-component proposal-walkway" data-proposal-reveal>
-            <div className="proposal-component-image"><ProposalImage asset="walkway" available={assets.walkway} alt={copy.walkway.title} /></div>
+            <div className="proposal-component-image"><ProposalImage asset="walkway" version={assets.walkway} alt={copy.walkway.title} /></div>
             <div className="proposal-component-copy"><div><h3>{copy.walkway.title}</h3><p>{copy.walkway.description}</p></div></div>
           </article>
         </div>

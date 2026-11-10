@@ -38,7 +38,7 @@
   --implementation-border: #c8d6d3;
   --implementation-accent: #2d6369;
   color: var(--implementation-ink);
-  background: #f6f8f6;
+  background: var(--editorial-paper);
 }
 .implementation-inner { width: min(84%, 1200px); margin-inline: auto; }
 .implementation-hero {
@@ -75,7 +75,7 @@
   line-height: 1.36;
   text-wrap: balance;
 }
-[lang="en"] .implementation-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 600; line-height: 1.15; }
+[lang="en"] .implementation-hero h1 { font-family: var(--font-noto-sans), sans-serif; font-weight: 500; line-height: 1.15; }
 .implementation-back {
   display: inline-flex;
   align-items: center;
@@ -98,8 +98,8 @@
   line-height: 1.9;
 }
 .implementation-block { margin-top: clamp(2.5rem, 5.5vw, 4.75rem); }
-.implementation-block h2 { margin: 0 0 1rem; font-size: clamp(1.4rem, 2.5vw, 2.3rem); font-weight: 600; line-height: 1.45; }
-.implementation-block :is(h3, h4) { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.55; }
+.implementation-block h2 { margin: 0 0 1rem; font-size: clamp(1.4rem, 2.5vw, 2.3rem); font-weight: 500; line-height: 1.45; }
+.implementation-block :is(h3, h4) { margin: 0; font-size: 1rem; font-weight: 500; line-height: 1.55; }
 .implementation-note, .implementation-org p, .implementation-timeline p, .implementation-technical p, .implementation-structure figcaption {
   margin: .45rem 0 0;
   color: var(--implementation-muted);
@@ -112,7 +112,7 @@
   min-width: 0;
   padding: clamp(1rem, 2vw, 1.65rem);
   border: 1px solid var(--implementation-border);
-  background: #fff;
+  background: var(--editorial-panel);
 }
 .implementation-partner-heading {
   margin-bottom: .95rem;
@@ -124,16 +124,16 @@
 .implementation-responsibilities li::marker { color: var(--implementation-accent); }
 .implementation-lead-partner { grid-column: 1 / -1; border-top: 2px solid var(--implementation-accent); }
 .implementation-tracks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.implementation-tracks > div, .implementation-technical { padding: 1rem; background: #edf3f1; }
+.implementation-tracks > div, .implementation-technical { padding: 1rem; background: var(--editorial-tint); }
 .implementation-tracks h4 { margin-bottom: .5rem; }
 .implementation-technical { margin-top: .8rem; }
 .implementation-technology-grid { padding: 0; list-style: none; }
 .implementation-technology-grid li { border-inline-start: 2px solid var(--implementation-accent); font-size: .88rem; line-height: 1.65; }
 
-.implementation-structure { margin: 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--implementation-border); background: #edf3f1; }
+.implementation-structure { margin: 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--implementation-border); background: var(--editorial-tint); }
 .implementation-org { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; gap: 1.4rem; }
 .implementation-org ol { display: grid; gap: 1.2rem; margin: 0; padding: 0; list-style: none; }
-.implementation-org li, .implementation-oversight { position: relative; padding: .9rem 1.1rem; border: 1px solid var(--implementation-border); background: #fff; }
+.implementation-org li, .implementation-oversight { position: relative; padding: .9rem 1.1rem; border: 1px solid var(--implementation-border); background: var(--editorial-panel); }
 .implementation-org li + li::before {
   content: "";
   position: absolute;
@@ -181,13 +181,13 @@
   gap: 1rem;
   padding: clamp(1rem, 3vw, 2rem);
   border: 1px solid var(--implementation-border);
-  background: #edf3f1;
+  background: var(--editorial-tint);
 }
 .implementation-funding p { display: grid; gap: .2rem; margin: 0; font-size: .85rem; }
 .implementation-funding strong { color: var(--implementation-accent); font-size: clamp(1.7rem, 3.8vw, 3rem); line-height: 1.25; }
 .implementation-decisions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .implementation-decisions p { margin: .65rem 0 0; font-size: .9rem; line-height: 1.75; }
-.implementation-closing { margin: 1.25rem 0 0; padding: 1rem; border-inline-start: 2px solid var(--implementation-accent); background: #edf3f1; line-height: 1.85; }
+.implementation-closing { margin: 1.25rem 0 0; padding: 1rem; border-inline-start: 2px solid var(--implementation-accent); background: var(--editorial-tint); line-height: 1.85; }
 
 @media (max-width: 900px) {
   .implementation-technology-grid, .implementation-decisions { grid-template-columns: repeat(2, minmax(0, 1fr)); }

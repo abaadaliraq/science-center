@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
   images: {
     localPatterns: [
       { pathname: "/**", search: "" },
-      { pathname: "/images/proposal/*-dome.jpg" },
+      { pathname: "/images/planetarium-current.jpg" },
+      { pathname: "/images/proposal/*.jpg" },
+      { pathname: "/images/operations/*.jpg" },
+      { pathname: "/images/feasibility/section-cover.jpg" },
+      { pathname: "/images/implementation/section-cover.jpg" },
     ],
   },
   turbopack: {

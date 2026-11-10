@@ -16,7 +16,7 @@ const shortPartners = ["mismar", "masdar", "utopian"] as const;
 const investment = new Intl.NumberFormat("en-US").format(calculateFeasibility().investment);
 const indexLabel = (index: number) => String(index + 1).padStart(2, "0");
 
-function ImplementationMedia({ asset, available }: { asset: ImplementationImage; available?: boolean }) {
+function ImplementationMedia({ asset, version }: { asset: ImplementationImage; version?: string }) {
   const { language } = useLanguage();
   const [failed, setFailed] = useState(false);
   const copy = implementationContent[language];
@@ -24,8 +24,8 @@ function ImplementationMedia({ asset, available }: { asset: ImplementationImage;
 
   return (
     <div className="implementation-photo">
-      {available && !failed ? (
-        <Image src={`/images/implementation/${implementationImages[asset]}`} alt="" fill sizes={sizes}
+      {version && !failed ? (
+        <Image src={`/images/implementation/${implementationImages[asset]}?v=${version}`} alt="" fill sizes={sizes}
           preload={asset === "hero"} onError={() => setFailed(true)} />
       ) : (
         <span className="implementation-placeholder">{copy.missingImage}</span>
@@ -54,7 +54,7 @@ export function ImplementationSection({ assets = {} }: { assets?: Implementation
   return (
     <HomeSectionBanner id="implementation-partnerships" titleId="implementation-section-title" theme="petrol"
       title={copy.title} summary={copy.summary} href="/implementation-partnerships" linkLabel={copy.explore}
-      image={<ImplementationMedia asset="cover" available={assets.cover} />}
+      image={<ImplementationMedia asset="cover" version={assets.cover} />}
     />
   );
 }
@@ -69,7 +69,7 @@ export function ImplementationDetails({ assets = {} }: { assets?: Implementation
   return (
     <section ref={root} className="implementation-page" aria-labelledby="implementation-title" data-history-transition>
       <header className="implementation-hero">
-        <ImplementationMedia asset="hero" available={assets.hero} />
+        <ImplementationMedia asset="hero" version={assets.hero} />
         <div className="implementation-inner" data-proposal-reveal>
           <HistoryLink href="/#implementation-partnerships" className="implementation-back">
             <span aria-hidden="true">←</span>{copy.back}

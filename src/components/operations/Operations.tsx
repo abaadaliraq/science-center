@@ -17,15 +17,15 @@ const programIcons = [
   "M3 8h18l-2-5H5L3 8Zm1 0v13h16V8M9 21v-7h6v7M3 8a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0",
 ];
 
-function OperationsPhoto({ asset, available }: { asset: OperationsImage; available?: boolean }) {
+function OperationsPhoto({ asset, version }: { asset: OperationsImage; version?: string }) {
   const { language } = useLanguage();
   const [failed, setFailed] = useState(false);
   const sizes = asset === "hero" ? "100vw" : "(max-width: 700px) 100vw, 40vw";
 
   return (
     <div className={`operations-photo operations-photo-${asset}`}>
-      {available && !failed ? (
-        <Image src={`/images/operations/${operationsImages[asset]}`} alt="" fill sizes={sizes} preload={asset === "hero"} onError={() => setFailed(true)} />
+      {version && !failed ? (
+        <Image src={`/images/operations/${operationsImages[asset]}?v=${version}`} alt="" fill sizes={sizes} preload={asset === "hero"} onError={() => setFailed(true)} />
       ) : (
         <span className="operations-photo-empty">{operationsContent[language].imagePending}</span>
       )}
@@ -46,17 +46,17 @@ export function OperationsSection({ assets = {} }: { assets?: OperationsAssets }
       summary={copy.summary}
       href="/operations"
       linkLabel={copy.explore}
-      image={<OperationsPhoto asset="cover" available={assets.cover} />}
+      image={<OperationsPhoto asset="cover" version={assets.cover} />}
     />
   );
 }
 
 type BodyImage = Exclude<OperationsImage, "hero" | "cover">;
 
-function OperationsBlock({ asset, title, available, children }: {
+function OperationsBlock({ asset, title, version, children }: {
   asset: BodyImage;
   title: string;
-  available?: boolean;
+  version?: string;
   children: ReactNode;
 }) {
   return (
@@ -66,7 +66,7 @@ function OperationsBlock({ asset, title, available, children }: {
         {children}
       </div>
       <div className="operations-block-visual">
-        <OperationsPhoto asset={asset} available={available} />
+        <OperationsPhoto asset={asset} version={version} />
       </div>
     </section>
   );
@@ -82,7 +82,7 @@ export function OperationsDetails({ assets = {} }: { assets?: OperationsAssets }
   return (
     <section ref={root} className="operations-page" aria-labelledby="operations-title" data-history-transition>
       <header className="operations-hero">
-        <OperationsPhoto asset="hero" available={assets.hero} />
+        <OperationsPhoto asset="hero" version={assets.hero} />
         <div className="operations-inner operations-hero-copy" data-proposal-reveal>
           <HistoryLink href="/#operations" className="operations-back">
             <span aria-hidden="true">←</span>{copy.back}
@@ -113,7 +113,7 @@ export function OperationsDetails({ assets = {} }: { assets?: OperationsAssets }
         </section>
 
         <div className="operations-blocks">
-          <OperationsBlock asset="programs" title={copy.programs.title} available={assets.programs}>
+          <OperationsBlock asset="programs" title={copy.programs.title} version={assets.programs}>
             <ul className="operations-cards operations-programs">
               {copy.programs.items.map((item, index) => (
                 <li key={item}>
@@ -126,7 +126,7 @@ export function OperationsDetails({ assets = {} }: { assets?: OperationsAssets }
             </ul>
           </OperationsBlock>
 
-          <OperationsBlock asset="revenue" title={copy.revenue.title} available={assets.revenue}>
+          <OperationsBlock asset="revenue" title={copy.revenue.title} version={assets.revenue}>
             <figure className="operations-revenue">
               <figcaption>{copy.revenue.hub}</figcaption>
               <ul className="operations-revenue-sources">
@@ -135,13 +135,13 @@ export function OperationsDetails({ assets = {} }: { assets?: OperationsAssets }
             </figure>
           </OperationsBlock>
 
-          <OperationsBlock asset="costs" title={copy.costs.title} available={assets.costs}>
+          <OperationsBlock asset="costs" title={copy.costs.title} version={assets.costs}>
             <ul className="operations-cards operations-costs">
               {copy.costs.items.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </OperationsBlock>
 
-          <OperationsBlock asset="sustainability" title={copy.sustainability.title} available={assets.sustainability}>
+          <OperationsBlock asset="sustainability" title={copy.sustainability.title} version={assets.sustainability}>
             <ul className="operations-steps">
               {copy.sustainability.items.map((item) => <li key={item}>{item}</li>)}
             </ul>

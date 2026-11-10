@@ -12,7 +12,7 @@ export default function ProjectProposalSection({ assets = {} }: { assets?: Propo
   return (
     <HomeSectionBanner id="project-proposal" titleId="proposal-section-title" theme="petrol" title={copy.sectionTitle}
       summary={copy.summary} href="/project-proposal" linkLabel={copy.explore}
-      image={<ProposalImage asset="cover" available={assets.cover} alt={copy.coverAlt} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 60vw" />}
+      image={<ProposalImage asset="cover" version={assets.cover} alt={copy.coverAlt} sizes="(max-width: 700px) 100vw, 55vw" />}
     />
   );
 }

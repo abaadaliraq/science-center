@@ -1,5 +1,6 @@
-export const feasibilityImages = { cover: "section-cover.jpg", hero: "hero.jpg" } as const;
-export type FeasibilityAssets = Partial<Record<keyof typeof feasibilityImages, boolean>>;
+const cover = "section-cover.jpg";
+export const feasibilityImages = { cover, hero: cover } as const;
+export type FeasibilityAssets = Partial<Record<keyof typeof feasibilityImages, string>>;
 
 export const feasibilityContent = {
   ar: {

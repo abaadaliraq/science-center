@@ -1,10 +1,8 @@
-export const implementationImages = {
-  cover: "section-cover.jpg",
-  hero: "hero.jpg",
-} as const;
+const cover = "section-cover.jpg";
+export const implementationImages = { cover, hero: cover } as const;
 
 export type ImplementationImage = keyof typeof implementationImages;
-export type ImplementationAssets = Partial<Record<ImplementationImage, boolean>>;
+export type ImplementationAssets = Partial<Record<ImplementationImage, string>>;
 
 export const implementationContent = {
   ar: {

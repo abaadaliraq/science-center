@@ -1,0 +1,60 @@
+.hero-branding {
+  position: absolute;
+  z-index: 10;
+  inset: clamp(1rem, 2.1vw, 2rem) var(--page-gutter) auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(.5rem, 2vw, 1.5rem);
+  padding-bottom: clamp(.625rem, 1.2vw, 1rem);
+  border-bottom: 1px solid #fff9;
+}
+
+.hero-branding-partner {
+  display: flex;
+  align-items: center;
+  gap: clamp(.3rem, 1.2vw, 1rem);
+  max-width: calc((100% - clamp(.5rem, 2vw, 1.5rem)) / 2);
+}
+.hero-branding-names {
+  display: grid;
+  min-width: 0;
+  gap: .2rem;
+  text-align: left;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px #122031b3;
+}
+.hero-branding-partner-right .hero-branding-names { text-align: right; }
+.hero-branding-names [lang="ar"] {
+  font-family: var(--font-alexandria), sans-serif;
+  font-size: clamp(.625rem, 1.15vw, .9rem);
+  font-weight: 500;
+}
+.hero-branding-names [lang="en"] {
+  color: #f2f4f8;
+  font-family: var(--font-noto-sans), sans-serif;
+  font-size: clamp(.5625rem, 1vw, .78rem);
+  font-weight: 400;
+}
+
+.hero-branding-mark {
+  position: relative;
+  display: block;
+  flex: none;
+  height: clamp(2.55rem, 3.4vw, 3.55rem);
+  overflow: hidden;
+}
+
+.hero-branding-mark img { position: absolute; max-width: none; height: auto; }
+
+/* Frame the emblem areas shown on the reference cover using the original PDF assets. */
+.hero-branding-mismar { aspect-ratio: 88 / 188; }
+.hero-branding-mismar img { width: calc(313 / 88 * 100%); left: calc(-112 / 88 * 100%); top: calc(-53 / 188 * 100%); }
+.hero-branding-masdar { aspect-ratio: 142 / 138; }
+.hero-branding-masdar img { width: calc(287 / 142 * 100%); left: calc(-76 / 142 * 100%); top: calc(-31 / 138 * 100%); }
+
+@media (max-width: 700px) {
+  #cover.hero:has(> .hero-branding) { flex-direction: column; padding-block-start: 1rem; }
+  .hero-branding { position: relative; inset: auto; width: 100%; margin-bottom: 2rem; }
+  .hero-branding-mark { height: clamp(1.8rem, 8vw, 2.55rem); }
+}

@@ -160,7 +160,7 @@ button.proposal-masterplan-preview { cursor: zoom-in; }
   padding: 16px;
   overflow: auto;
   color: #26454e;
-  background: #f4f7f6;
+  background: var(--editorial-paper);
   border: 1px solid #26454e30;
 }
 .proposal-masterplan-dialog::backdrop { background: #13272bd9; }
@@ -174,7 +174,7 @@ button.proposal-masterplan-preview { cursor: zoom-in; }
 .proposal-expansion-card {
   padding: clamp(1rem, 2vw, 1.75rem);
   border: 1px solid var(--proposal-line);
-  background: #ffffffa6;
+  background: var(--editorial-panel);
   color: var(--proposal-text);
   font-size: 14px;
   line-height: 1.9;
@@ -186,17 +186,17 @@ button.proposal-masterplan-preview { cursor: zoom-in; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
 }
-.proposal-page .proposal-domes-grid .proposal-component { background: #f1edf4; }
-.proposal-page .proposal-domes-grid .proposal-component:nth-child(even) { background: #edf2f0; }
+.proposal-page .proposal-domes-grid .proposal-component { background: var(--editorial-panel); }
+.proposal-page .proposal-domes-grid .proposal-component:nth-child(even) { background: var(--editorial-tint); }
 .proposal-page .proposal-component h4 { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.7; font-weight: 500; }
 .proposal-page .proposal-walkway {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   align-items: center;
-  background: #eaf0ef;
+  background: var(--editorial-paper);
 }
-.proposal-page .proposal-investment { background: #f3eee3; }
-.proposal-page .proposal-planning { background: #edf1ec; }
+.proposal-page .proposal-investment { background: var(--editorial-paper); }
+.proposal-page .proposal-planning { background: var(--editorial-paper); }
 .proposal-investment-grid dt { font-size: clamp(17px, 1.6vw, 22px); }
 .proposal-investment-grid bdi { font-size: clamp(26px, 3vw, 42px); }
 .proposal-investment-grid > :last-child { border-top: 3px solid #8a6349; }

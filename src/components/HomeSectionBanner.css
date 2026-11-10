@@ -8,8 +8,13 @@
   --banner-line: #ffffff75;
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  min-height: var(--cover-height);
-  width: 100%;
+  aspect-ratio: 820 / 312;
+  min-height: min-content;
+  width: min(90%, 1440px);
+  margin: 0 auto clamp(1rem, 2.8vw, 2.75rem);
+  border-radius: clamp(.65rem, 1.3vw, 1.15rem);
+  overflow: hidden;
+  box-shadow: 0 .5rem 1.6rem #1b293322;
   color: var(--banner-ink);
   background: var(--banner-bg);
   isolation: isolate;
@@ -20,7 +25,7 @@
 .home-banner-olive { --banner-bg: #59674e; --banner-muted: #edf0e7; }
 .home-banner-ochre { --banner-bg: #956b43; --banner-muted: #f6eddf; }
 .home-banner-media { position: relative; min-width: 0; overflow: hidden; background: #e8e5de; }
-.home-banner-panel { position: relative; min-width: 0; display: flex; align-items: center; padding: 42px 10%; overflow: hidden; isolation: isolate; text-align: start; }
+.home-banner-panel { position: relative; min-width: 0; display: flex; align-items: center; padding: clamp(1rem, 2.8vw, 2.75rem); overflow: hidden; isolation: isolate; text-align: start; }
 .home-banner-visual, .home-banner-image-inner { position: absolute; inset: 0; }
 .home-banner-media img { object-fit: cover; }
 .home-banner-media .proposal-media { background: #e8e5de; }
@@ -30,26 +35,23 @@
 .home-banner-number { position: absolute; top: 5%; inset-inline-start: 8%; font-family: var(--font-montserrat), sans-serif; font-size: clamp(8rem, 14vw, 16rem); font-weight: 700; line-height: 1; color: #ffffff14; direction: ltr; pointer-events: none; user-select: none; z-index: -1; }
 .home-banner-number::before { content: counter(home-section, decimal-leading-zero); }
 .home-banner-content { width: 100%; position: relative; }
-.home-banner-content h2 { font-size: clamp(28px, 2.8vw, 44px); font-weight: 600; line-height: 1.5; margin: 0; text-wrap: balance; }
-[lang="en"] .home-banner-content h2 { line-height: 1.3; letter-spacing: -1px; }
-.home-banner-rule { display: block; width: 35px; height: 1px; margin-block: 20px; background: var(--banner-line); }
-.home-banner-summary { color: var(--banner-muted); font-size: clamp(13px, .95vw, 16px); font-weight: 400; line-height: 1.85; margin: 0 0 24px; }
+.home-banner-content h2 { font-size: clamp(1.35rem, 2.35vw, 2.45rem); font-weight: 500; line-height: 1.43; margin: 0; text-wrap: balance; }
+[lang="en"] .home-banner-content h2 { line-height: 1.34; letter-spacing: -.025em; }
+.home-banner-rule { display: block; width: 35px; height: 1px; margin-block: clamp(.65rem, 1.4vw, 1.25rem); background: var(--banner-line); }
+.home-banner-summary { color: var(--banner-muted); font-size: clamp(13px, .95vw, 16px); font-weight: 400; line-height: 1.85; margin: 0 0 clamp(.75rem, 1.4vw, 1.4rem); }
 .home-banner-summary > span { display: block; }
 .home-banner-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 25px; max-width: 100%; min-height: 46px; padding: 10px 20px; border: 1px solid #fff; color: #fff; font-size: 11px; font-weight: 500; line-height: 1.8; transition: color .2s, background .2s; }
 .home-banner-link:hover { color: var(--banner-bg); background: #fff; }
 .home-banner-link:focus-visible { outline-color: #fff; }
 @media (min-width: 701px) and (max-width: 1100px) {
   .home-section-banner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .home-banner-panel { padding: 40px 9%; }
-  .home-banner-content h2 { font-size: 30px; }
-  .home-banner-summary { font-size: 13px; }
   .home-banner-number { font-size: 9rem; }
 }
 @media (max-width: 700px) {
-  .home-section-banner { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .home-section-banner { grid-template-columns: minmax(0, 1fr); aspect-ratio: auto; min-height: 0; }
   .home-banner-media { aspect-ratio: 820 / 312; }
-  .home-banner-panel { padding: 62px 8% 48px; }
-  .home-banner-content h2 { font-size: 32px; line-height: 1.5; }
+  .home-banner-panel { padding: 1.5rem 7%; }
+  .home-banner-content h2 { font-size: clamp(1.25rem, 5.3vw, 1.85rem); line-height: 1.45; }
   [lang="en"] .home-banner-content h2 { line-height: 1.3; }
   .home-banner-summary { font-size: 14px; line-height: 1.95; }
   .home-banner-number { top: 10px; inset-inline-start: 4%; font-size: 9rem; }

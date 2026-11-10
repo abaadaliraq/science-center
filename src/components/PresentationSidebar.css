@@ -1,0 +1,47 @@
+.presentation-sidebar {
+  position: fixed;
+  z-index: 35;
+  left: max(.5rem, env(safe-area-inset-left));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .45rem;
+  width: 3.375rem;
+  max-height: calc(100dvh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  padding: .5rem .1875rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  color: #dbe5ea;
+  background: #101e2b;
+  border: 1px solid #8aa8b63d;
+  border-radius: 2rem;
+  box-shadow: 0 .4rem 1.4rem #060d182b;
+}
+
+.presentation-sidebar ul { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.presentation-sidebar :is(a, button) {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.presentation-sidebar button { border: 1px solid #8aa8b64d; }
+.presentation-sidebar svg { width: 20px; height: 20px; }
+.presentation-sidebar :is(a, button):hover { background: #263e50; color: #fff; }
+.presentation-sidebar a[aria-current] { background: #a7d2d5; color: #102431; }
+.presentation-sidebar :is(a, button):focus-visible { outline: 2px solid #c4e9ed; outline-offset: -2px; }
+.presentation-sidebar a[aria-current]:focus-visible { outline-color: #183341; }
+
+@media (max-width: 1024px) {
+  .presentation-sidebar { left: max(.375rem, env(safe-area-inset-left)); width: 3rem; padding-inline: 0; }
+  .presentation:has(> .presentation-sidebar) { padding-left: calc(3rem + max(.375rem, env(safe-area-inset-left))); }
+}
+
+@media (max-height: 520px) {
+  .presentation-sidebar ul { gap: .125rem; }
+}

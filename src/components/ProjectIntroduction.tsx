@@ -33,25 +33,43 @@ export default function ProjectIntroduction() {
   const partners = implementationContent[language];
   return (
     <section id="project-introduction" className="project-introduction" lang={language} dir={language === "ar" ? "rtl" : "ltr"} aria-labelledby="project-introduction-title">
-      <div className="project-introduction-inner" data-reveal>
-        <div className="project-introduction-copy">
+      <div className="project-introduction-inner">
+        <div className="project-introduction-copy" data-reveal>
           <p className="project-introduction-label">{copy.label}</p>
           <h2 id="project-introduction-title">{copy.title}</h2>
           <p>{copy.lead}</p>
           <p>{copy.detail}</p>
         </div>
-        <div className="project-introduction-foundations">
+        <div className="project-introduction-foundations" data-reveal="slide">
+          <svg className="project-introduction-orbits" viewBox="0 0 280 180" fill="none" aria-hidden="true" focusable="false">
+            <g stroke="currentColor" transform="rotate(-28 178 62)">
+              <ellipse cx="178" cy="62" rx="113" ry="37" />
+              <ellipse cx="178" cy="62" rx="91" ry="59" />
+              <ellipse cx="178" cy="62" rx="60" ry="77" />
+            </g>
+            <g fill="currentColor">
+              <circle cx="178" cy="62" r="3" />
+              <circle cx="218" cy="115" r="2.5" />
+              <circle cx="75" cy="99" r="2" />
+            </g>
+          </svg>
           <h3>{copy.partners}</h3>
           <ul>
             {foundations.map(({ id, site, href }) => (
               <li key={id}>
                 <a href={href}>
-                  <Image src={`/images/logos/${id}-logo.png`} width={48} height={48} alt="" />
+                  <span className="project-introduction-mark">
+                    <Image src={`/images/logos/${id}-logo.png`} width={52} height={52} alt="" />
+                  </span>
                   <span>
                     <strong>{partners[id].name}</strong>
                     <bdi dir="ltr">{site}</bdi>
                   </span>
-                  <span className="project-introduction-arrow" aria-hidden="true">↗</span>
+                  <span className="project-introduction-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 15 15 5m-7 0h7v7" />
+                    </svg>
+                  </span>
                 </a>
               </li>
             ))}

@@ -45,3 +45,28 @@
 @media (max-height: 520px) {
   .presentation-sidebar ul { gap: .125rem; }
 }
+
+@media (max-width: 700px), (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+  .presentation:has(> .presentation-sidebar) {
+    --mobile-dock-clearance: calc(3.75rem + env(safe-area-inset-bottom));
+    padding-left: 0;
+  }
+  .presentation-sidebar {
+    inset: auto auto max(.5rem, env(safe-area-inset-bottom)) 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 1fr);
+    gap: .15rem;
+    width: min(25rem, calc(100% - 1rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+    padding: .2rem .3rem;
+    overflow: visible;
+  }
+  .presentation-sidebar ul { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; }
+  .presentation-sidebar :is(a, button) {
+    width: min(100%, 42px);
+    height: 40px;
+    justify-self: center;
+    margin-inline: auto;
+  }
+  .presentation-sidebar svg { width: 17px; height: 17px; }
+}

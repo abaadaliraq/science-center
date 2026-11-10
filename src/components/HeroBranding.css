@@ -8,6 +8,7 @@
   gap: clamp(.5rem, 2vw, 1.5rem);
   padding-bottom: clamp(.625rem, 1.2vw, 1rem);
   border-bottom: 1px solid #fff9;
+  animation: text-opening .7s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .hero-branding-partner {
@@ -54,7 +55,8 @@
 .hero-branding-masdar img { width: calc(287 / 142 * 100%); left: calc(-76 / 142 * 100%); top: calc(-31 / 138 * 100%); }
 
 @media (max-width: 700px) {
-  #cover.hero:has(> .hero-branding) { flex-direction: column; padding-block-start: 1rem; }
-  .hero-branding { position: relative; inset: auto; width: 100%; margin-bottom: 2rem; }
-  .hero-branding-mark { height: clamp(1.8rem, 8vw, 2.55rem); }
+  #cover.hero:has(> .hero-branding) { flex-direction: column; padding-block-start: .85rem; }
+  .hero-branding { position: relative; inset: auto; width: 100%; margin-bottom: 1.35rem; }
+  .hero-branding-names { display: none; }
+  .hero-branding-mark { height: clamp(1.9rem, 8vw, 2.55rem); }
 }

@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import HistoricalBackground from "@/components/HistoricalBackground";
-import PresentationMotion from "@/components/PresentationMotion";
 import { Suspense } from "react";
 import HistoryTeaserLoader from "@/components/HistoryTeaserLoader";
 import ProjectProposalSection from "@/components/proposal/ProjectProposalSection";
@@ -23,7 +22,6 @@ export default function Home() {
       <Suspense fallback={<OperationsSection />}><OperationsLoader view="section" /></Suspense>
       <Suspense fallback={<FeasibilitySection />}><FeasibilityLoader view="section" /></Suspense>
       <Suspense fallback={<ImplementationSection />}><ImplementationLoader view="section" /></Suspense>
-      <PresentationMotion />
     </main>
   );
 }

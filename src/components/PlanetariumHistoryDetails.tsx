@@ -16,7 +16,7 @@ export default function PlanetariumHistoryDetails({ gallery, hero }: { gallery: 
     <section className="history-details-page" aria-labelledby="history-title" data-history-transition>
       {hero}
       <div className="history-details-body"><div className="section-inner mx-auto history-detail-inner">
-        <p className="detail-cover-introduction">{historyEditorial[language].heroSubtitle}</p>
+        <p className="detail-cover-introduction" data-reveal>{historyEditorial[language].heroSubtitle}</p>
         <div className="section-index flex items-center gap-5" data-reveal>
           <span>01</span><span className="section-rule grow" aria-hidden="true" />
         </div>

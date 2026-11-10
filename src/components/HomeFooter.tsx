@@ -45,7 +45,7 @@ export default function HomeFooter() {
   return (
     <footer className="home-footer">
       <div className="home-footer-inner">
-        <div className="home-footer-columns">
+        <div className="home-footer-columns" data-reveal>
           <div className="home-footer-intro">
             <div className="home-footer-brand">
               <div className="home-footer-marks" aria-hidden="true">
@@ -78,7 +78,7 @@ export default function HomeFooter() {
           </div>
         </div>
 
-        <div className="home-footer-meta">
+        <div className="home-footer-meta" data-reveal="fade">
           <p className="home-footer-copyright"><bdi lang="en" dir="ltr">© 2026 Baghdad Space Science Center — Project Proposal</bdi></p>
           <a className="home-footer-credit" href="https://www.abaad-aliraq.com/" lang="en" dir="ltr">
             <Image src="/images/logos/abaad-aliraq-logo.png" width={28} height={28} alt="" />

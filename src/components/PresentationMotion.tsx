@@ -1,65 +1,102 @@
 "use client";
 
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
-/** Native, progressive enhancement: content remains visible without JavaScript. */
+const targets = '[data-reveal], .home-banner-visual img, main:not(.home-presentation) img:not(dialog img)';
+const ease = "cubic-bezier(.22, 1, .36, 1)";
+
+/** Reveals loaded images and editorial content, including sections streamed after navigation. */
 export default function PresentationMotion() {
-  useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktop = window.matchMedia("(min-width: 1024px)");
-    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const hero = document.querySelector<HTMLElement>("[data-parallax]");
-    let observer: IntersectionObserver | undefined;
-    let frame = 0;
+  const pathname = usePathname();
+  const played = useRef(new WeakSet<Element>());
 
-    const updateParallax = () => {
-      frame = 0;
-      if (!hero || preference.matches || !desktop.matches) return;
-      const height = hero.parentElement?.clientHeight ?? 0;
-      if (window.scrollY <= height) {
-        hero.style.setProperty("--parallax-y", `${Math.min(window.scrollY * 0.07, 40)}px`);
-      }
-    };
-    const onScroll = () => {
-      if (!frame && !preference.matches && desktop.matches) frame = requestAnimationFrame(updateParallax);
-    };
-    const configure = () => {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window) || typeof Element.prototype.animate !== "function") return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const wide = window.matchMedia("(min-width: 701px)");
+    const revealed = played.current;
+    const animations = new Set<Animation>();
+    let observer: IntersectionObserver | undefined;
+    let mutations: MutationObserver | undefined;
+
+    function register(element: Element) {
+      if (!element.matches(targets) || revealed.has(element)) return;
+      if (element instanceof HTMLImageElement && (!element.complete || !element.naturalWidth)) return;
+      observer?.observe(element);
+    }
+
+    function registerTree(node: Node) {
+      if (!(node instanceof Element)) return;
+      register(node);
+      node.querySelectorAll(targets).forEach(register);
+    }
+
+    function onLoad(event: Event) {
+      if (event.target instanceof HTMLImageElement) register(event.target);
+    }
+
+    function stop() {
       observer?.disconnect();
-      hero?.style.setProperty("--parallax-y", "0px");
-      if (preference.matches || !("IntersectionObserver" in window)) {
-        elements.forEach((element) => element.removeAttribute("data-pending"));
-        return;
-      }
+      mutations?.disconnect();
+      document.removeEventListener("load", onLoad, true);
+      animations.forEach((animation) => animation.cancel());
+      animations.clear();
+    }
+
+    function configure() {
+      stop();
+      if (reduced.matches) return;
+
       observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.removeAttribute("data-pending");
-            observer?.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      elements.forEach((element) => {
-        // Never hide something the reader can already see, including anchor navigation.
-        if (element.getBoundingClientRect().top > window.innerHeight) {
-          element.setAttribute("data-pending", "true");
-          observer?.observe(element);
+        for (const { target, isIntersecting, boundingClientRect } of entries) {
+          if (!isIntersecting || revealed.has(target)) continue;
+          observer?.unobserve(target);
+          revealed.add(target);
+
+          const image = target instanceof HTMLImageElement;
+          const horizontal = wide.matches && (image || target.getAttribute("data-reveal") === "slide");
+          const side = boundingClientRect.left + boundingClientRect.width / 2 < window.innerWidth / 2 ? -1 : 1;
+          const fadeOnly = target.getAttribute("data-reveal") === "fade";
+          const from = horizontal ? `translate3d(${side * (image ? 22 : 16)}px, 0, 0)`
+            : fadeOnly ? "none" : `translate3d(0, ${image ? 12 : 10}px, 0)`;
+          const animation = target.animate(
+            [
+              { opacity: image ? .58 : .65, transform: image ? `${from} scale(1.045)` : from },
+              { opacity: 1, transform: "none" },
+            ],
+            { duration: image ? 960 : 630, easing: ease },
+          );
+          animations.add(animation);
+          const release = () => animations.delete(animation);
+          animation.addEventListener("finish", release, { once: true });
+          animation.addEventListener("cancel", release, { once: true });
+        }
+      }, { threshold: .1 });
+
+      document.querySelectorAll(targets).forEach(register);
+      document.addEventListener("load", onLoad, true);
+      mutations = new MutationObserver((records) => {
+        for (const { addedNodes, removedNodes } of records) {
+          addedNodes.forEach(registerTree);
+          removedNodes.forEach((node) => {
+            if (!(node instanceof Element) || node.isConnected) return;
+            observer?.unobserve(node);
+            node.querySelectorAll(targets).forEach((element) => observer?.unobserve(element));
+          });
         }
       });
-      updateParallax();
-    };
+      mutations.observe(document.body, { childList: true, subtree: true });
+    }
+
     configure();
-    preference.addEventListener("change", configure);
-    desktop.addEventListener("change", configure);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    reduced.addEventListener("change", configure);
     return () => {
-      observer?.disconnect();
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      preference.removeEventListener("change", configure);
-      desktop.removeEventListener("change", configure);
-      elements.forEach((element) => element.removeAttribute("data-pending"));
+      stop();
+      reduced.removeEventListener("change", configure);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

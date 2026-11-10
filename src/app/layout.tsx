@@ -4,6 +4,7 @@ import "./globals.css";
 import LanguageProvider from "@/components/LanguageProvider";
 import PresentationSidebar from "@/components/PresentationSidebar";
 import HomeFooter from "@/components/HomeFooter";
+import PresentationMotion from "@/components/PresentationMotion";
 import { presentation } from "@/content/presentation";
 
 const amiri = Amiri({ variable: "--font-amiri", subsets: ["arabic"], weight: ["400", "700"], display: "swap" });
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <PresentationSidebar />
           {children}
           <HomeFooter />
+          <PresentationMotion />
         </LanguageProvider>
       </body>
     </html>

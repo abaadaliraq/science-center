@@ -5,7 +5,7 @@ import { useEffect, type RefObject } from "react";
 export default function useProposalMotion(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const root = ref.current;
-    if (!root) return;
+    if (!root || !("IntersectionObserver" in window)) return;
     let cancelled = false;
     let revert = () => {};
     let resize: ResizeObserver | undefined;
@@ -19,7 +19,10 @@ export default function useProposalMotion(ref: RefObject<HTMLElement | null>) {
         const media = gsap.matchMedia();
         media.add("(prefers-reduced-motion: no-preference)", () => {
           root.querySelectorAll<HTMLElement>("[data-proposal-reveal]").forEach((element) => {
-            gsap.fromTo(element, { y: 12, opacity: .8 }, { y: 0, opacity: 1, duration: .65, ease: "power2.out", clearProps: "opacity,transform", scrollTrigger: { trigger: element, start: "top bottom-=30", once: true } });
+            gsap.fromTo(element, { y: 15, opacity: .65 }, {
+              y: 0, opacity: 1, duration: .72, ease: "power3.out", immediateRender: false,
+              clearProps: "opacity,transform", scrollTrigger: { trigger: element, start: "top bottom-=30", once: true },
+            });
           });
         }, root);
         media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {

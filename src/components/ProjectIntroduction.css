@@ -44,58 +44,108 @@
 }
 
 .project-introduction-foundations {
-  padding: clamp(1rem, 2.2vw, 1.75rem);
-  border: 1px solid #ded5bd;
-  border-block-start: 2px solid #4b7378;
-  border-radius: .75rem;
-  background: var(--editorial-panel);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.35vw, 2rem);
+  border: 1px solid #284753;
+  border-radius: 1rem;
+  color: #eef5f8;
+  background: radial-gradient(ellipse at 100% 0%, #245566 0%, transparent 60%), #0e202e;
+  box-shadow: 0 1rem 2.25rem #12283522;
+}
+.project-introduction-orbits {
+  position: absolute;
+  z-index: -1;
+  inset: -1.4rem -1.8rem auto auto;
+  width: min(65%, 280px);
+  color: #9ad5e2;
+  opacity: .24;
+  pointer-events: none;
 }
 .project-introduction-foundations h3 {
-  margin: 0 0 .85rem;
-  color: #38636b;
-  font-size: .88rem;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin: 0 0 .5rem;
+  color: #b8dae2;
+  font-size: .81rem;
+  font-weight: 500;
+}
+.project-introduction-foundations h3::before {
+  content: "";
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: #b7e4eb;
+  box-shadow: 0 0 0 .21rem #b7e4eb26;
 }
 .project-introduction-foundations ul {
-  display: grid;
-  gap: .55rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+.project-introduction-foundations li + li { border-block-start: 1px solid #b9dce030; }
 .project-introduction-foundations a {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: .7rem;
-  padding: .55rem;
-  border: 1px solid #e2dac6;
-  border-radius: .45rem;
-  background: var(--editorial-paper);
+  gap: clamp(.65rem, 1.25vw, 1rem);
+  padding-block: .85rem;
 }
-.project-introduction-foundations a:hover,
-.project-introduction-foundations a:focus-visible { border-color: #567a81; }
-.project-introduction-foundations img { width: 48px; height: 48px; object-fit: contain; }
+.project-introduction-foundations a:focus-visible { outline: 2px solid #b7e4eb; outline-offset: -2px; border-radius: .5rem; }
+.project-introduction-mark {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid #fff9;
+  border-radius: .65rem;
+  background: #faf6e9;
+}
+.project-introduction-mark img { width: 100%; height: 100%; object-fit: contain; }
 .project-introduction-foundations strong {
   display: block;
-  font-size: .83rem;
+  font-size: .87rem;
   font-weight: 500;
   line-height: 1.55;
 }
 .project-introduction-foundations bdi {
   display: inline-block;
   margin-top: .2rem;
-  color: #38636b;
+  color: #b0cbd5;
   font-size: .72rem;
   overflow-wrap: anywhere;
 }
 .project-introduction-foundations a:hover bdi { text-decoration: underline; text-underline-offset: .2em; }
-.project-introduction-arrow { color: #38636b; font-size: .9rem; }
+.project-introduction-arrow {
+  display: grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border: 1px solid #b9dce053;
+  border-radius: 50%;
+  color: #c4e4eb;
+  transition: background-color .2s ease, color .2s ease;
+}
+.project-introduction-arrow svg { width: .9rem; height: .9rem; }
+.project-introduction-foundations a:is(:hover, :focus-visible) .project-introduction-arrow {
+  color: #102631;
+  background: #b7e4eb;
+}
 
 @media (max-width: 780px) {
   .project-introduction-inner { grid-template-columns: minmax(0, 1fr); }
 }
+@media (max-width: 700px) {
+  .project-introduction { padding-block: 2rem; }
+  .project-introduction-inner { gap: 1.25rem; }
+  .project-introduction h2 { margin-bottom: .7rem; font-size: clamp(1.25rem, 5vw, 1.55rem); }
+  .project-introduction-copy > p:not(.project-introduction-label) { font-size: .9rem; line-height: 1.8; }
+  .project-introduction-foundations a { padding-block: .65rem; }
+}
 @media (max-width: 430px) {
-  .project-introduction-foundations a { gap: .4rem; }
-  .project-introduction-foundations img { width: 36px; height: 36px; }
+  .project-introduction-foundations a { gap: .55rem; }
+  .project-introduction-mark { width: 2.5rem; height: 2.5rem; }
+  .project-introduction-arrow { width: 1.55rem; height: 1.55rem; }
 }

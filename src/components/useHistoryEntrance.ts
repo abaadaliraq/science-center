@@ -5,7 +5,7 @@ import { useEffect, type RefObject } from "react";
 export default function useHistoryEntrance(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const root = ref.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!root || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let cancelled = false;
     let revert = () => {};
     const observer = new IntersectionObserver(([entry]) => {
@@ -17,8 +17,8 @@ export default function useHistoryEntrance(ref: RefObject<HTMLElement | null>) {
         media.add("(prefers-reduced-motion: no-preference)", () => {
           const text = root.querySelectorAll("[data-editorial-enter]");
           const images = root.querySelectorAll("[data-editorial-image]");
-          if (text.length) gsap.fromTo(text, { opacity: .8, y: 12 }, {
-            opacity: 1, y: 0, duration: .65, stagger: .08, ease: "power2.out", clearProps: "opacity,transform",
+          if (text.length) gsap.fromTo(text, { opacity: .65, y: 15 }, {
+            opacity: 1, y: 0, duration: .72, stagger: .08, ease: "power3.out", clearProps: "opacity,transform",
           });
           if (images.length) gsap.fromTo(images, { scale: 1.025 }, {
             scale: 1, duration: 1.2, ease: "power2.out", clearProps: "transform",

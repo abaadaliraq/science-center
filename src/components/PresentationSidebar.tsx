@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useLanguage } from "./LanguageProvider";
 import "./PresentationSidebar.css";
 
@@ -29,6 +29,8 @@ export default function PresentationSidebar() {
   const pathname = usePathname();
   const { language, setLanguage } = useLanguage();
   const [active, setActive] = useState("cover");
+  const [expanded, setExpanded] = useState(true);
+  const toggle = useRef<HTMLButtonElement>(null);
   const home = pathname === "/";
   const pageSection = sections.find(section => "page" in section && section.page === pathname)?.id;
   const arabic = language === "ar";
@@ -80,26 +82,51 @@ export default function PresentationSidebar() {
   const current = home || (pathname === "/project-proposal" && active === sustainabilityAnchor) ? active : pageSection;
 
   return (
-    <nav className="presentation-sidebar" aria-label={arabic ? "أقسام العرض" : "Presentation sections"}>
-      <ul>
-        {sections.map((section) => {
-          const planning = section.id === sustainabilityAnchor;
-          const samePage = planning ? pathname === "/project-proposal" : home;
-          const hash = `#${section.id}`;
-          const href = samePage ? hash : `${planning ? "/project-proposal" : "/"}${hash}`;
-          return (
-            <li key={section.id}>
-              <Link href={href} aria-label={section[language]} aria-current={current === section.id ? "location" : undefined}>
-                <SidebarIcon path={section.icon} />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-      <button type="button" aria-label={arabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
-        onClick={() => setLanguage(arabic ? "en" : "ar")}>
-        <SidebarIcon path="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
+    <nav
+      className="presentation-sidebar"
+      aria-label={arabic ? "أقسام العرض" : "Presentation sections"}
+      data-expanded={expanded}
+      onKeyDown={(event) => {
+        if (event.key !== "Escape" || !expanded) return;
+        event.preventDefault();
+        setExpanded(false);
+        toggle.current?.focus();
+      }}
+    >
+      <button
+        ref={toggle}
+        type="button"
+        className="presentation-sidebar-toggle"
+        aria-expanded={expanded}
+        aria-controls="presentation-sidebar-links"
+        aria-label={arabic ? (expanded ? "طي قائمة الأقسام" : "فتح قائمة الأقسام") : (expanded ? "Collapse sections" : "Expand sections")}
+        onClick={() => setExpanded(!expanded)}
+      >
+        <SidebarIcon path="M4 7h16M4 12h16M4 17h16" />
       </button>
+      <div className="presentation-sidebar-collapse" inert={!expanded}>
+        <div className="presentation-sidebar-content" id="presentation-sidebar-links">
+          <ul>
+            {sections.map((section, index) => {
+              const planning = section.id === sustainabilityAnchor;
+              const samePage = planning ? pathname === "/project-proposal" : home;
+              const hash = "#" + section.id;
+              const href = samePage ? hash : (planning ? "/project-proposal" : "/") + hash;
+              return (
+                <li key={section.id} style={{ "--sidebar-order": index } as CSSProperties}>
+                  <Link href={href} aria-label={section[language]} aria-current={current === section.id ? "location" : undefined}>
+                    <SidebarIcon path={section.icon} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <button type="button" aria-label={arabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
+            onClick={() => setLanguage(arabic ? "en" : "ar")}>
+            <SidebarIcon path="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
+          </button>
+        </div>
+      </div>
     </nav>
   );
 }

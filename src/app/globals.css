@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./space-theme.css";
+@import "./motion.css";
 
 :root {
   --background: #f6f5f0;
@@ -66,7 +67,6 @@ main:focus { outline: none; }
 .hero-parallax { inset: 0; transform: none; }
 .hero-visual { animation: image-opening 1.45s cubic-bezier(.22,1,.36,1) both; }
 .cover-study { background: #263849; }
-.local-image { opacity: 0; transition: opacity 1s ease; }
 .hero-shade { background: linear-gradient(180deg, #0d1c343d, #0d1c3429 35%, #091a329e), linear-gradient(270deg, #11294952, transparent 85%); }
 [dir="ltr"] .hero-shade { background: linear-gradient(180deg, #0d1c343d, #0d1c3429 35%, #091a329e), linear-gradient(90deg, #11294952, transparent 85%); }
 .hero-content { width: 100%; max-width: 1120px; height: auto; padding: 0; gap: 26px; }

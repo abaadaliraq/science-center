@@ -1,12 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { feasibilityContent, feasibilityImages, type FeasibilityAssets } from "@/content/feasibility";
 import HistoryLink from "../HistoryLink";
 import HomeSectionBanner from "../HomeSectionBanner";
 import { useLanguage } from "../LanguageProvider";
-import useProposalMotion from "../proposal/useProposalMotion";
 import FinancialModel from "./FinancialModel";
 import "./Feasibility.css";
 
@@ -49,12 +48,10 @@ export function FeasibilitySection({ assets = {} }: { assets?: FeasibilityAssets
 export function FeasibilityDetails({ assets = {} }: { assets?: FeasibilityAssets }) {
   const { language } = useLanguage();
   const copy = feasibilityContent[language];
-  const root = useRef<HTMLElement>(null);
-  useProposalMotion(root);
   useEffect(() => { document.title = copy.pageTitle; }, [copy.pageTitle]);
 
   return (
-    <section ref={root} className="feasibility-page" aria-labelledby="feasibility-title" data-history-transition>
+    <section className="feasibility-page" aria-labelledby="feasibility-title">
       <header className="feasibility-hero">
         <FeasibilityPhoto asset="hero" version={assets.hero} />
         <div className="feasibility-inner" data-proposal-reveal>

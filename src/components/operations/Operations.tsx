@@ -1,12 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { operationsContent, operationsImages, type OperationsAssets, type OperationsImage } from "@/content/operations";
 import HistoryLink from "../HistoryLink";
 import HomeSectionBanner from "../HomeSectionBanner";
 import { useLanguage } from "../LanguageProvider";
-import useProposalMotion from "../proposal/useProposalMotion";
 import "./Operations.css";
 
 const programIcons = [
@@ -75,12 +74,10 @@ function OperationsBlock({ asset, title, version, children }: {
 export function OperationsDetails({ assets = {} }: { assets?: OperationsAssets }) {
   const { language } = useLanguage();
   const copy = operationsContent[language];
-  const root = useRef<HTMLElement>(null);
-  useProposalMotion(root);
   useEffect(() => { document.title = copy.pageTitle; }, [copy.pageTitle]);
 
   return (
-    <section ref={root} className="operations-page" aria-labelledby="operations-title" data-history-transition>
+    <section className="operations-page" aria-labelledby="operations-title">
       <header className="operations-hero">
         <OperationsPhoto asset="hero" version={assets.hero} />
         <div className="operations-inner operations-hero-copy" data-proposal-reveal>

@@ -74,7 +74,9 @@ function FinancialCounter({ value }: { value: number }) {
   return (
     <bdi dir="ltr">
       <span className="sr-only">{finalValue}</span>
-      <span ref={ref} aria-hidden="true">{finalValue}</span>
+      <span className="motion-number" aria-hidden="true">
+        <span>{finalValue}</span><span ref={ref}>{finalValue}</span>
+      </span>
     </bdi>
   );
 }

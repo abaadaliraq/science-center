@@ -5,6 +5,7 @@ import LanguageProvider from "@/components/LanguageProvider";
 import PresentationSidebar from "@/components/PresentationSidebar";
 import HomeFooter from "@/components/HomeFooter";
 import PresentationMotion from "@/components/PresentationMotion";
+import PlanetCursor from "@/components/PlanetCursor";
 import PresentationFullscreen from "@/components/PresentationFullscreen";
 import { presentation } from "@/content/presentation";
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <HomeFooter />
           <PresentationMotion />
+          <PlanetCursor />
         </LanguageProvider>
       </body>
     </html>

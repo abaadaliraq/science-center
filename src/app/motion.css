@@ -1,0 +1,102 @@
+/* Motion styles are opt-in. The rendered page stays readable without animation. */
+.motion-number { display: inline-grid; font-variant-numeric: tabular-nums; }
+.motion-number > span { grid-area: 1 / 1; }
+.motion-number > span:first-child { visibility: hidden; }
+.motion-number > span:last-child { justify-self: end; }
+
+.planet-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  contain: layout style;
+}
+.planet-cursor[hidden] { display: none; }
+.planet-cursor-layer { position: fixed; z-index: 100; inset: 0; overflow: clip; pointer-events: none; }
+.planet-cursor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 2px #1119339c);
+  transition: scale .2s ease;
+}
+.planet-cursor-orbit {
+  transform-origin: 16px 16px;
+  animation: saturn-orbit 6s ease-in-out infinite alternate;
+}
+.planet-cursor[data-interactive] svg { scale: 1.18; }
+.planet-cursor::before, .planet-cursor-pulse {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  border: 1px solid #e7cb91;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.planet-cursor::before { content: ""; transition: opacity .2s ease; }
+.planet-cursor[data-interactive]::before { opacity: .62; box-shadow: 0 0 7px #a58fce80; }
+@keyframes saturn-orbit { from { rotate: -25deg; } to { rotate: -12deg; } }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.planet-cursor-active, html.planet-cursor-active body * { cursor: none !important; }
+  html.planet-cursor-active :is(iframe, video[controls], dialog[open], textarea, select, input:not([type="button"], [type="submit"], [type="checkbox"], [type="radio"]), [contenteditable]):not([contenteditable="false"]),
+  html.planet-cursor-active :is(dialog[open], [contenteditable]:not([contenteditable="false"])) * { cursor: revert !important; }
+  html.planet-cursor-active :is(textarea, [contenteditable]:not([contenteditable="false"]), input:not([type]), input:is([type="text"], [type="search"], [type="email"], [type="url"], [type="tel"], [type="password"], [type="number"])) { cursor: text !important; }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .planet-cursor { display: none; }
+}
+
+.home-footer { position: relative; isolation: isolate; overflow: clip; }
+.home-footer-decoration {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 52% 100%, #73553414, transparent 66%);
+}
+.home-footer-watermark {
+  margin-block-end: .15em;
+  color: #7355340e;
+  font-size: clamp(1.8rem, 6.3vw, 8rem);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.home-banner-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -18%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 38% 24%, #ffffff15, transparent 57%), radial-gradient(ellipse at 76% 80%, #0a0e251a, transparent 52%);
+  animation: banner-depth 22s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.home-section-banner[data-motion-visible] .home-banner-panel::before { animation-play-state: running; }
+@keyframes banner-depth { to { transform: translate3d(7%, -5%, 0) scale(1.08); } }
+
+:is(.home-banner-rule, .proposal-rule) { transform-origin: left; }
+[dir="rtl"] :is(.home-banner-rule, .proposal-rule) { transform-origin: right; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(.home-banner-link, .history-back-link, .proposal-back, .operations-back, .feasibility-back, .implementation-back) > span[aria-hidden] {
+    display: inline-block;
+    transition: translate .25s cubic-bezier(.22, 1, .36, 1);
+  }
+  :is(.home-banner-link, .history-back-link, .proposal-back, .operations-back, .feasibility-back, .implementation-back):is(:hover, :focus-visible) > span[aria-hidden] {
+    translate: 3px 0;
+  }
+  [dir="rtl"] :is(.home-banner-link, .history-back-link, .proposal-back, .operations-back, .feasibility-back, .implementation-back):is(:hover, :focus-visible) > span[aria-hidden] {
+    translate: -3px 0;
+  }
+  .home-footer nav li { transition: translate .24s ease; }
+  .home-footer nav li:is(:hover, :focus-within) { translate: 3px 0; }
+  [dir="rtl"] .home-footer nav li:is(:hover, :focus-within) { translate: -3px 0; }
+}

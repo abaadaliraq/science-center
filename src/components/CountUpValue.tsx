@@ -47,5 +47,10 @@ export default function CountUpValue({ start, end }: { start: number; end?: numb
     };
   }, [start, end]);
 
-  return <span ref={element} aria-hidden="true" dir="ltr">{start}{end === undefined ? null : `–${end}`}</span>;
+  const value = end === undefined ? String(start) : start + "–" + end;
+  return (
+    <span className="motion-number" aria-hidden="true" dir="ltr">
+      <span>{value}</span><span ref={element}>{value}</span>
+    </span>
+  );
 }

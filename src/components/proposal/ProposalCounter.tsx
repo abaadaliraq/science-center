@@ -31,5 +31,12 @@ export default function ProposalCounter({ value }: { value: number }) {
     preference.addEventListener("change", onPreference);
     return () => { observer?.disconnect(); preference.removeEventListener("change", onPreference); finish(); };
   }, [value]);
-  return <><span className="sr-only">{finalValue}</span><span ref={element} aria-hidden="true" dir="ltr">{finalValue}</span></>;
+  return (
+    <>
+      <span className="sr-only">{finalValue}</span>
+      <span className="motion-number" aria-hidden="true" dir="ltr">
+        <span>{finalValue}</span><span ref={element}>{finalValue}</span>
+      </span>
+    </>
+  );
 }

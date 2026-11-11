@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   implementationContent, implementationImages, type ImplementationAssets, type ImplementationImage,
 } from "@/content/implementation";
@@ -9,7 +9,6 @@ import { calculateFeasibility } from "@/lib/feasibility-model";
 import HistoryLink from "../HistoryLink";
 import HomeSectionBanner from "../HomeSectionBanner";
 import { useLanguage } from "../LanguageProvider";
-import useProposalMotion from "../proposal/useProposalMotion";
 import "./Implementation.css";
 
 const shortPartners = ["mismar", "masdar", "utopian"] as const;
@@ -62,12 +61,10 @@ export function ImplementationSection({ assets = {} }: { assets?: Implementation
 export function ImplementationDetails({ assets = {} }: { assets?: ImplementationAssets }) {
   const { language } = useLanguage();
   const copy = implementationContent[language];
-  const root = useRef<HTMLElement>(null);
-  useProposalMotion(root);
   useEffect(() => { document.title = copy.pageTitle; }, [copy.pageTitle]);
 
   return (
-    <section ref={root} className="implementation-page" aria-labelledby="implementation-title" data-history-transition>
+    <section className="implementation-page" aria-labelledby="implementation-title">
       <header className="implementation-hero">
         <ImplementationMedia asset="hero" version={assets.hero} />
         <div className="implementation-inner" data-proposal-reveal>

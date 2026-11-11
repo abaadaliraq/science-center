@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useLanguage } from "../LanguageProvider";
 import HistoryLink from "../HistoryLink";
 import { proposalContent, type ProposalAssets, type ProposalImageKey } from "@/content/proposal";
@@ -8,7 +8,6 @@ import ProposalImage from "./ProposalImage";
 import ProposalCounter from "./ProposalCounter";
 import ProposalMasterplan from "./ProposalMasterplan";
 import ProposalTour from "./ProposalTour";
-import useProposalMotion from "./useProposalMotion";
 import "./ProjectProposal.css";
 import "../InstitutionalPages.css";
 
@@ -23,11 +22,9 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
     { title: copy.centerTitle, items: copy.components, className: "proposal-components-grid" },
     { title: copy.domesTitle, items: copy.domes, className: "proposal-domes-grid" },
   ];
-  const root = useRef<HTMLElement>(null);
-  useProposalMotion(root);
   useEffect(() => { document.title = copy.pageTitle; }, [copy.pageTitle]);
   return (
-    <section ref={root} className="proposal-page" aria-labelledby="proposal-title" data-history-transition>
+    <section className="proposal-page" aria-labelledby="proposal-title">
       <header className="proposal-hero">
         <span className="detail-cover-number" aria-hidden="true">02</span>
         <div className="proposal-hero-content">

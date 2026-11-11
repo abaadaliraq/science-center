@@ -22,11 +22,7 @@ export default function LocalImage({ src, alt, available, hero = false }: LocalI
       fill
       sizes="100vw"
       preload={hero}
-      className="local-image object-cover"
-      onLoad={(event) => {
-        event.currentTarget.style.opacity = "1";
-        event.currentTarget.parentElement?.setAttribute("data-image-loaded", "true");
-      }}
+      className="object-cover"
       onError={() => setFailed(true)}
     />
   );

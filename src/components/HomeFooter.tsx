@@ -44,6 +44,7 @@ export default function HomeFooter() {
 
   return (
     <footer className="home-footer">
+      <div className="home-footer-decoration" aria-hidden="true"><span className="home-footer-watermark">{text.name}</span></div>
       <div className="home-footer-inner">
         <div className="home-footer-columns" data-reveal>
           <div className="home-footer-intro">

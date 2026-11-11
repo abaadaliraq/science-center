@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./space-theme.css";
 
 :root {
   --background: #f6f5f0;
@@ -29,6 +30,28 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 ::selection { color: #fff; background: #67577c; }
 a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
 main:focus { outline: none; }
+.presentation-fullscreen {
+  position: fixed;
+  top: max(.6rem, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 36;
+  text-align: center;
+}
+.presentation-fullscreen button {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #9db6c864;
+  border-radius: 50%;
+  color: #e1edf4;
+  background: #101e2b;
+  cursor: pointer;
+}
+.presentation-fullscreen button:hover { background: #294459; }
+.presentation-fullscreen svg { width: 19px; height: 19px; }
+.presentation-fullscreen p { margin: .35rem 0 0; padding: .35rem .6rem; color: #f1f6fa; background: #101e2b; font-size: .75rem; }
 .arabic { font-family: var(--font-alexandria), sans-serif; text-align: start; font-weight: 400; }
 .english { font-family: var(--font-montserrat), sans-serif; text-align: start; font-weight: 400; }
 .skip-link { position: fixed; z-index: 50; top: 12px; inset-inline-start: var(--page-gutter); padding: 15px; color: #263849; background: #f6f5f0; transform: translateY(-200%); }
@@ -110,3 +133,78 @@ main:focus { outline: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .section-rule { transform: none !important; }
 }
+
+/* Arabic typography uses Alexandria's variable weights and keeps the display face for the cover. */
+.arabic {
+  --arabic-copy-weight: 350;
+  --arabic-heading-weight: 430;
+  --arabic-label-weight: 420;
+  font-weight: var(--arabic-copy-weight);
+}
+
+.arabic #main-content .hero-titles h1 {
+  font-size: clamp(34px, 4.65vw, 72px);
+  line-height: 1.38;
+  text-shadow: 0 2px 10px #101b2d70;
+}
+.arabic #main-content .hero-titles h1 span { font-size: .74em; }
+.hero-branding .hero-branding-names [lang="ar"] { font-weight: 420; }
+
+.arabic #main-content .project-introduction h2 {
+  font-size: clamp(1.45rem, 2.45vw, 2.5rem);
+  font-weight: var(--arabic-heading-weight);
+  line-height: 1.55;
+}
+.arabic #main-content .project-introduction-copy > p:not(.project-introduction-label) {
+  font-size: clamp(.9rem, 1.03vw, 1rem);
+  line-height: 1.95;
+}
+.arabic #main-content .home-banner-content h2 {
+  font-size: clamp(1.22rem, 2.05vw, 2.15rem);
+  font-weight: var(--arabic-heading-weight);
+  line-height: 1.55;
+}
+.arabic #main-content :is(.home-banner-link, .project-introduction-label, .project-introduction-foundations h3, .project-introduction-foundations strong) {
+  font-weight: var(--arabic-label-weight);
+}
+
+.arabic #main-content:not(.home-presentation) h1 {
+  font-size: clamp(2rem, 4.1vw, 4rem);
+  line-height: 1.47;
+}
+.arabic #main-content:not(.home-presentation) h2 {
+  font-size: clamp(1.35rem, 2.15vw, 2.1rem);
+  font-weight: var(--arabic-heading-weight);
+  line-height: 1.55;
+}
+.arabic #main-content:not(.home-presentation) :is(h3, h4) {
+  font-weight: var(--arabic-heading-weight);
+  line-height: 1.65;
+}
+.arabic #main-content :is(.detail-cover-introduction, .history-detail-copy, .proposal-lead, .proposal-section-heading > p, .implementation-intro) {
+  font-size: clamp(.95rem, 1.16vw, 1.12rem);
+  font-weight: var(--arabic-copy-weight);
+  line-height: 1.95;
+}
+.arabic #main-content :is(.proposal-component, .proposal-expansion-card) :is(h3, h4) {
+  font-size: clamp(1rem, 1.28vw, 1.15rem);
+}
+.arabic #main-content :is(.proposal-component p, .proposal-expansion-card) { line-height: 1.9; }
+.arabic #main-content :is(.proposal-expansion-card dt, .operations-kpi-grid li, .feasibility-disclosure summary, .feasibility-cash-chart figcaption) {
+  font-weight: var(--arabic-label-weight);
+}
+
+.presentation.arabic .home-footer { font-weight: var(--arabic-copy-weight); }
+.presentation.arabic .home-footer h2 { font-weight: var(--arabic-heading-weight); }
+
+@media (max-width: 700px) {
+  .arabic #main-content .hero-titles h1 { font-size: clamp(1.55rem, 6vw, 2.05rem); }
+  .arabic #main-content .project-introduction h2 { font-size: clamp(1.35rem, 5vw, 1.65rem); }
+  .arabic #main-content .home-banner-content h2 { font-size: clamp(1.08rem, 4.4vw, 1.45rem); }
+  .arabic #main-content:not(.home-presentation) h1 { font-size: clamp(1.6rem, 5.6vw, 2rem); }
+  .arabic #main-content:not(.home-presentation) h2 { font-size: clamp(1.2rem, 4.35vw, 1.45rem); }
+}
+@media (max-height: 560px) and (min-width: 701px) and (orientation: landscape) {
+  .arabic #main-content .hero-titles h1 { font-size: 2.15rem; }
+}
+

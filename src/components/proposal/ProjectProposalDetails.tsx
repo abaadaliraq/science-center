@@ -7,6 +7,7 @@ import { proposalContent, type ProposalAssets, type ProposalImageKey } from "@/c
 import ProposalImage from "./ProposalImage";
 import ProposalCounter from "./ProposalCounter";
 import ProposalMasterplan from "./ProposalMasterplan";
+import ProposalTour from "./ProposalTour";
 import useProposalMotion from "./useProposalMotion";
 import "./ProjectProposal.css";
 import "../InstitutionalPages.css";
@@ -17,6 +18,7 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
 }) {
   const { language } = useLanguage();
   const copy = proposalContent[language];
+  const cards = copy.interactiveCards;
   const componentGroups = [
     { title: copy.centerTitle, items: copy.components, className: "proposal-components-grid" },
     { title: copy.domesTitle, items: copy.domes, className: "proposal-domes-grid" },
@@ -50,7 +52,7 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
       <section className="proposal-block proposal-site" aria-labelledby="proposal-site-title">
         <div className="proposal-inner">
           <header className="proposal-section-heading" data-proposal-reveal><div className="proposal-kicker"><span>02</span><span className="proposal-rule" /></div><h2 id="proposal-site-title">{copy.siteTitle}</h2></header>
-          <ProposalMasterplan version={assets.masterplan} />
+          <ProposalMasterplan key={assets.masterplan} version={assets.masterplan} />
           <div className="proposal-expansion-grid proposal-zones">
             {copy.siteZones.map((zone) => <article key={zone.title} className="proposal-expansion-card" data-proposal-reveal><h3>{zone.title}</h3><p>{zone.description}</p></article>)}
           </div>
@@ -67,7 +69,7 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
                 const isDome = group.className === "proposal-domes-grid";
                 const version = isDome ? domeVersions[item.image] : assets[item.image];
                 return (
-                  <article key={item.image} className={`proposal-component${isDome ? "" : ` proposal-component-${index + 1}`}`} data-proposal-reveal>
+                  <article key={item.image} data-proposal-asset={item.image} className={`proposal-component${isDome ? "" : ` proposal-component-${index + 1}`}`} data-proposal-reveal>
                     <div className="proposal-component-image">
                       <ProposalImage
                         key={version ?? item.image}
@@ -78,14 +80,46 @@ export default function ProjectProposalDetails({ assets = {}, domeVersions = {} 
                         sizes="(max-width: 800px) 100vw, 60vw"
                       />
                     </div>
-                    <div className="proposal-component-copy"><span className="proposal-component-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><div><h4>{item.title}</h4><p>{item.description}</p></div></div>
+                    <div className="proposal-component-copy">
+                      <span className="proposal-component-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h4>{item.title}</h4>
+                        <p>{item.description}</p>
+                        {"cardsTopic" in item && <p className="proposal-dome-cards"><strong>{cards.label}</strong> — {item.cardsTopic}</p>}
+                      </div>
+                    </div>
                   </article>
                 );
               })}</div>
+              {group.className === "proposal-components-grid" && (
+                <section className="proposal-planetarium-tour" aria-labelledby="proposal-planetarium-tour-title" data-proposal-reveal>
+                  <h4 id="proposal-planetarium-tour-title">{copy.tourTitle}</h4>
+                  <ProposalTour />
+                </section>
+              )}
+              {group.className === "proposal-domes-grid" && (
+                <section className="proposal-space-cards" aria-labelledby="proposal-space-cards-title" data-proposal-reveal>
+                  <h4 id="proposal-space-cards-title">{cards.title}</h4>
+                  <p className="proposal-lead">{cards.description}</p>
+                  <figure className="proposal-space-cards-video">
+                    <iframe
+                      src="https://player.vimeo.com/video/1068098797?autoplay=0&controls=1"
+                      title={cards.title}
+                      loading="lazy"
+                      allow="fullscreen; picture-in-picture; encrypted-media"
+                      allowFullScreen
+                    />
+                    <figcaption>
+                      <p className="proposal-note">{cards.reference}</p>
+                      <a href="https://vimeo.com/1068098797" target="_blank" rel="noopener noreferrer">{cards.openVideo}</a>
+                    </figcaption>
+                  </figure>
+                </section>
+              )}
             </div>
           ))}
           <article className="proposal-component proposal-walkway" data-proposal-reveal>
-            <div className="proposal-component-image"><ProposalImage asset="walkway" version={assets.walkway} alt={copy.walkway.title} /></div>
+            <div className="proposal-component-image"><ProposalImage key={assets.walkway} asset="walkway" version={assets.walkway} alt={copy.walkway.title} /></div>
             <div className="proposal-component-copy"><div><h3>{copy.walkway.title}</h3><p>{copy.walkway.description}</p></div></div>
           </article>
         </div>

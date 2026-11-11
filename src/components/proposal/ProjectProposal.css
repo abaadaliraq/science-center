@@ -154,17 +154,44 @@ button.proposal-masterplan-preview { cursor: zoom-in; }
 .proposal-masterplan-dialog {
   position: fixed;
   inset: 0;
-  width: min(96vw, 1500px);
-  max-height: 94dvh;
-  margin: auto;
-  padding: 16px;
-  overflow: auto;
-  color: #26454e;
-  background: var(--editorial-paper);
-  border: 1px solid #26454e30;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #f3f7fa;
+  background: #111e2b;
+  border: 0;
 }
-.proposal-masterplan-dialog::backdrop { background: #13272bd9; }
-.proposal-masterplan-expanded { position: relative; height: min(75dvh, 900px); margin-top: 12px; }
+.proposal-masterplan-dialog[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.proposal-masterplan-dialog::backdrop { background: #111e2b; }
+.proposal-masterplan-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: max(.5rem, env(safe-area-inset-top)) max(.7rem, env(safe-area-inset-right)) .5rem max(.7rem, env(safe-area-inset-left));
+  border-bottom: 1px solid #acc9dc40;
+  background: #172939;
+}
+.proposal-masterplan-controls { display: flex; align-items: center; gap: .35rem; }
+.proposal-masterplan-toolbar button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: .35rem .55rem;
+  border: 1px solid #acc9dc60;
+  border-radius: .35rem;
+  font-size: .85rem;
+  cursor: pointer;
+}
+.proposal-masterplan-toolbar button:hover:not(:disabled) { background: #294459; }
+.proposal-masterplan-toolbar button:disabled { opacity: .45; cursor: default; }
+.proposal-masterplan-expanded { min-width: 0; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.proposal-masterplan-canvas { position: relative; }
+html:has(.proposal-masterplan-dialog[open]) { overflow: hidden; }
 .proposal-expansion-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -189,6 +216,57 @@ button.proposal-masterplan-preview { cursor: zoom-in; }
 .proposal-page .proposal-domes-grid .proposal-component { background: var(--editorial-panel); }
 .proposal-page .proposal-domes-grid .proposal-component:nth-child(even) { background: var(--editorial-tint); }
 .proposal-page .proposal-component h4 { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.7; font-weight: 500; }
+.proposal-page .proposal-component-copy .proposal-dome-cards {
+  margin-top: .7rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--proposal-line);
+  font-size: .8rem;
+}
+.proposal-space-cards,
+.proposal-planetarium-tour {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1rem, 3vw, 2.25rem);
+  border: 1px solid var(--proposal-line);
+  background: var(--editorial-panel);
+  text-align: center;
+}
+.proposal-space-cards h4,
+.proposal-planetarium-tour h4 {
+  margin: 0 auto .6rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  text-wrap: balance;
+}
+.proposal-page .proposal-space-cards .proposal-lead {
+  max-width: 62ch;
+  margin-inline: auto;
+  font-size: clamp(.88rem, 1.1vw, 1rem);
+  font-weight: 400;
+  line-height: 1.9;
+}
+.proposal-space-cards-video,
+.proposal-planetarium-tour .proposal-tour { max-width: 820px; margin: 1rem auto 0; }
+.proposal-planetarium-tour .proposal-tour-actions { justify-content: center; }
+.proposal-page :is(.proposal-space-cards, .proposal-planetarium-tour) .proposal-note {
+  max-width: 66ch;
+  margin-inline: auto;
+  padding: 0;
+  border: 0;
+}
+.proposal-space-cards-video iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #142532;
+}
+.proposal-space-cards-video a {
+  display: inline-block;
+  margin-top: .65rem;
+  font-size: .85rem;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
 .proposal-page .proposal-walkway {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);

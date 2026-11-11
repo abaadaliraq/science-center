@@ -9,18 +9,29 @@ export function readProposalAssets(): Promise<ProposalAssets> {
   return readPublicImageVersions("proposal", proposalImages);
 }
 
+async function hashProposalImage(key: ProposalImageKey) {
+  try {
+    const file = path.join(process.cwd(), "public", "images", "proposal", proposalImages[key]);
+    return createHash("sha256").update(await readFile(file)).digest("hex");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
+    throw error;
+  }
+}
+
+export async function readProposalDetailAssets(): Promise<ProposalAssets> {
+  const [assets, masterplan, walkway] = await Promise.all([
+    readProposalAssets(),
+    hashProposalImage("masterplan"),
+    hashProposalImage("walkway"),
+  ]);
+  return { ...assets, masterplan, walkway };
+}
+
 export async function readProposalDomeVersions(): Promise<Partial<Record<ProposalImageKey, string>>> {
   // Keep Jupiter's own card when a second file is an exact copy of its artwork.
   const domes = ["jupiter", "sun", "earth", "mars", "moon"] as const;
-  const versions = await Promise.all(domes.map(async (dome) => {
-    try {
-      const file = path.join(process.cwd(), "public", "images", "proposal", proposalImages[dome]);
-      return createHash("sha256").update(await readFile(file)).digest("hex");
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
-      throw error;
-    }
-  }));
+  const versions = await Promise.all(domes.map(hashProposalImage));
   const uniqueVersions = new Set<string>();
   const result: Partial<Record<ProposalImageKey, string>> = {};
   for (const [index, dome] of domes.entries()) {

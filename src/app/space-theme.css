@@ -1,0 +1,155 @@
+/* Shared surfaces for the presentation content. Covers and the footer keep their own palette. */
+#main-content {
+  --space-ink: #f7f3ff;
+  --space-copy: #d5dcf2;
+  --space-accent: #d1c5fa;
+  --space-line: #a5b5ed38;
+  --space-base: #111933;
+  --space-panel: #1b2647;
+  --space-raised: #262b50;
+  --space-background:
+    radial-gradient(ellipse 85% 32rem at 4% 10rem, #25457caa, transparent 85%),
+    radial-gradient(ellipse 70% 40rem at 100% 18rem, #4f367fb0, transparent 86%),
+    linear-gradient(155deg, #10182f, #181b3b 53%, #221834);
+  --card-blue: #243e6c;
+  --card-violet: #3c2c60;
+  --card-teal: #1e4851;
+  --card-rose: #56304b;
+  --card-copper: #563e36;
+  --card-slate: #344159;
+  --card-green: #344a42;
+  color: var(--space-ink);
+  background: var(--space-background);
+}
+
+#main-content :is(a, button, summary):focus-visible { outline-color: var(--space-accent); }
+
+#main-content.home-presentation {
+  display: flow-root;
+  --space-background:
+    radial-gradient(ellipse 80% 42rem at 0% var(--cover-height), #25457cc4, transparent 86%),
+    radial-gradient(ellipse 85% 50rem at 100% calc(var(--cover-height) + 18rem), #503583b8, transparent 84%),
+    linear-gradient(155deg, #10182f, #181b3b 53%, #251936);
+}
+#main-content .project-introduction { background: transparent; color: var(--space-ink); }
+#main-content .project-introduction-label { color: #b9d5ff; }
+#main-content .project-introduction-copy > p:not(.project-introduction-label) { color: var(--space-copy); }
+#main-content .project-introduction-foundations {
+  border-color: var(--space-line);
+  background: radial-gradient(ellipse at 100% 0%, #344e7c, transparent 72%), #1b2443;
+  box-shadow: 0 1rem 2.25rem #080c2438;
+}
+#main-content .home-section-banner { box-shadow: 0 .6rem 1.8rem #090c254f; }
+
+#main-content :is(.history-details-page, .proposal-page, .operations-page, .feasibility-page, .implementation-page) {
+  --editorial-paper: var(--space-base);
+  --editorial-panel: var(--space-panel);
+  --editorial-tint: var(--space-raised);
+  background: transparent;
+}
+
+#main-content .proposal-page {
+  --detail-ink: var(--space-ink);
+  --detail-paper: transparent;
+  --proposal-ivory: var(--space-ink);
+  --proposal-text: var(--space-copy);
+  --proposal-accent: var(--space-accent);
+  --proposal-line: var(--space-line);
+}
+#main-content .proposal-page :is(.proposal-investment, .proposal-planning) { background: transparent; }
+#main-content .proposal-page :is(.proposal-kicker, .proposal-vision-route li, .proposal-tour-mark, .proposal-tour-fallback) { color: var(--proposal-accent); }
+#main-content .proposal-page :is(.proposal-site-facts dt, .proposal-image-empty span) { color: var(--proposal-text); }
+#main-content .proposal-page :is(.proposal-tour-frame, .proposal-tour-status) { background: var(--editorial-panel); }
+#main-content .proposal-page .proposal-indicators {
+  --proposal-ivory: var(--space-ink);
+  --proposal-text: var(--space-copy);
+  --proposal-accent: var(--space-accent);
+  --proposal-line: var(--space-line);
+  background: linear-gradient(115deg, #24365c, #35254f);
+}
+
+#main-content .proposal-page :is(.proposal-component, .proposal-expansion-card, .proposal-space-cards, .proposal-planetarium-tour),
+#main-content .history-detail-card,
+#main-content .operations-block,
+#main-content .implementation-card,
+#main-content .feasibility-kpis li {
+  background: linear-gradient(145deg, var(--card-tone, var(--space-raised)), var(--space-base) 130%);
+  border: 1px solid var(--space-line);
+  border-radius: .85rem;
+  box-shadow: 0 .55rem 1.4rem #090b2226;
+}
+#main-content :is(.proposal-component, .operations-block) { overflow: hidden; }
+#main-content .proposal-component-number {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  padding: .2rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: var(--card-accent, var(--space-accent));
+  font-size: .8rem;
+}
+#main-content .proposal-expansion-card :is(h3, dt) { color: var(--space-ink); }
+#main-content .proposal-page .proposal-dome-cards { color: var(--card-accent, var(--space-accent)); }
+#main-content .proposal-page .proposal-walkway { --card-tone: var(--card-teal); }
+#main-content .proposal-page .proposal-space-cards { --card-tone: var(--card-violet); }
+#main-content .proposal-page .proposal-planetarium-tour { --card-tone: var(--card-blue); }
+
+#main-content :is(.proposal-components-grid, .proposal-expansion-grid, .history-detail-cards, .operations-blocks, .implementation-partner-grid) > :nth-child(6n + 1) { --card-tone: var(--card-blue); }
+#main-content :is(.proposal-components-grid, .proposal-expansion-grid, .history-detail-cards, .operations-blocks, .implementation-partner-grid) > :nth-child(6n + 2) { --card-tone: var(--card-violet); }
+#main-content :is(.proposal-components-grid, .proposal-expansion-grid, .history-detail-cards, .operations-blocks, .implementation-partner-grid) > :nth-child(6n + 3) { --card-tone: var(--card-teal); }
+#main-content :is(.proposal-components-grid, .proposal-expansion-grid, .operations-blocks, .implementation-partner-grid) > :nth-child(6n + 4) { --card-tone: var(--card-rose); }
+#main-content .proposal-components-grid > :nth-child(6n + 5) { --card-tone: var(--card-green); }
+#main-content .proposal-components-grid > :nth-child(6n + 6) { --card-tone: var(--card-copper); }
+
+#main-content [data-proposal-asset="sun"] { --card-tone: var(--card-copper); --card-accent: #f2d29b; }
+#main-content [data-proposal-asset="earth"] { --card-tone: var(--card-teal); --card-accent: #a9e0dc; }
+#main-content [data-proposal-asset="mars"] { --card-tone: var(--card-rose); --card-accent: #f4bdb7; }
+#main-content [data-proposal-asset="jupiter"] { --card-tone: var(--card-violet); --card-accent: #e1c8ff; }
+#main-content [data-proposal-asset="moon"] { --card-tone: var(--card-slate); --card-accent: #d3e1fb; }
+
+#main-content .history-details-page { --detail-ink: var(--space-ink); }
+#main-content .history-details-page .history-detail-cards { gap: .9rem; background: transparent; border: 0; }
+#main-content .history-details-page :is(.history-detail-copy, .history-detail-description, .history-detail-documentation, .history-gallery-empty, .history-gallery-grid figcaption) { color: var(--space-copy); }
+#main-content .history-details-page :is(.section-index, .history-detail-label, .history-detail-sources a) { color: var(--space-accent); }
+#main-content .history-details-page .history-detail-sources a:hover { color: var(--space-ink); }
+#main-content .history-details-page :is(.history-detail-documentation, .history-gallery, .history-gallery-empty, .history-detail-card) { border-color: var(--space-line); }
+#main-content .history-details-page .section-rule { background: var(--space-line); }
+
+#main-content .operations-page {
+  --operations-ink: var(--space-ink);
+  --operations-muted: var(--space-copy);
+  --operations-accent: #bcd9c8;
+  --operations-line: var(--space-line);
+}
+#main-content .operations-page :is(.operations-org-management, .operations-revenue figcaption) { color: var(--space-base); }
+#main-content .operations-steps li + li { border-color: var(--space-line); }
+#main-content .operations-kpi-grid > :nth-child(4n + 1) { background: var(--card-blue); }
+#main-content .operations-kpi-grid > :nth-child(4n + 2) { background: var(--card-violet); }
+#main-content .operations-kpi-grid > :nth-child(4n + 3) { background: var(--card-teal); }
+#main-content .operations-kpi-grid > :nth-child(4n + 4) { background: var(--card-slate); }
+
+#main-content .implementation-page {
+  --implementation-ink: var(--space-ink);
+  --implementation-muted: var(--space-copy);
+  --implementation-accent: #aadbd9;
+  --implementation-border: var(--space-line);
+}
+#main-content .implementation-index { color: var(--space-base); }
+
+#main-content .feasibility-page {
+  --feasibility-ink: var(--space-ink);
+  --feasibility-muted: var(--space-copy);
+  --feasibility-accent: #f4d3a9;
+  --feasibility-border: var(--space-line);
+}
+#main-content .feasibility-table-scroll :is(th, td) { border-color: var(--space-line); }
+#main-content .feasibility-table-scroll tr.feasibility-total { background: var(--space-raised); }
+#main-content .feasibility-kpis li { --card-tone: var(--card-blue); }
+#main-content .feasibility-kpis li[data-tone="revenue"] { --card-tone: var(--card-green); --kpi-ink: #c6e4c1; }
+#main-content .feasibility-kpis li[data-tone="expenses"] { --card-tone: var(--card-rose); --kpi-ink: #f4bdb7; }
+#main-content .feasibility-kpis li[data-tone="cash"] { --card-tone: var(--card-teal); --kpi-ink: #a9e0dc; }
+#main-content .feasibility-kpis li[data-tone="payback"] { --card-tone: var(--card-violet); --kpi-ink: #e1c8ff; }
+#main-content .feasibility-kpis li { border-block-start-color: var(--kpi-ink, var(--feasibility-accent)); }

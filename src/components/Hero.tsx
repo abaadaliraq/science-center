@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
       <div className="hero-shade absolute inset-0" aria-hidden="true" />
       <div className="hero-branding" dir="ltr">
-        <div className="hero-branding-partner">
+        <div className="hero-branding-partner hero-branding-partner-right">
           <span className="hero-branding-mark hero-branding-mismar">
             <Image src="/images/mismar-hero-mark.png" width={313} height={313} alt="" preload />
           </span>
@@ -35,7 +35,7 @@ export default function Hero() {
             <span lang="en" dir="ltr">{implementationContent.en.mismar.name}</span>
           </div>
         </div>
-        <div className="hero-branding-partner hero-branding-partner-right">
+        <div className="hero-branding-partner">
           <div className="hero-branding-names">
             <span lang="ar" dir="rtl">{implementationContent.ar.masdar.name}</span>
             <span lang="en" dir="ltr">{implementationContent.en.masdar.name}</span>
